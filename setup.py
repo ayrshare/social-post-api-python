@@ -10,12 +10,12 @@ AUTHOR_EMAIL = 'contact@ayrshare.com'
 URL = 'https://github.com/nevermind-solutions/social-post-api-python'
 
 LICENSE = 'Apache License 2.0'
-DESCRIPTION = 'Automate social media posting via an API for your company or clients'
+DESCRIPTION = 'Automate social media posts via Ayrshare\'s API for your company or clients. Post to Instagram, Twitter, Facebook, LinkedIn, Telegram, and Reddit.'
 LONG_DESCRIPTION = (HERE / "README.md").read_text()
 LONG_DESC_TYPE = "text/markdown"
 
 INSTALL_REQUIRES = [
-      'requests'
+    'requests'
 ]
 
 setup(name=PACKAGE_NAME,
