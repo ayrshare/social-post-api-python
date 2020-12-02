@@ -1,9 +1,0 @@
-README.md
-setup.py
-package/__init__.py
-package/ayrshare.py
-social_media_api.egg-info/PKG-INFO
-social_media_api.egg-info/SOURCES.txt
-social_media_api.egg-info/dependency_links.txt
-social_media_api.egg-info/requires.txt
-social_media_api.egg-info/top_level.txt
