@@ -1,7 +1,5 @@
 ./dist
-<<<<<<< HEAD
-./build
 API-KEY.json
-=======
 ./build
->>>>>>> 7f3d39f (first commit)
+./social_post_api.egg-info
+./social_media_api.egg-info
