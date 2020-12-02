@@ -2,7 +2,7 @@ import json
 from ayrshare import SocialPost
 
 with open('./API-KEY.json') as f:
-  API_KEY = json.load(f)
+    API_KEY = json.load(f)
 
 social = SocialPost(API_KEY["key"])
 

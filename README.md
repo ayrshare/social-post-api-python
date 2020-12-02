@@ -14,17 +14,18 @@ Also, check out our [video](https://youtu.be/WQTQmjvqvMM) of installing and usin
 
 ## Setup
 
-1. Create a free [Ayrshare account](https://app.ayrshare.com).
-   
+**1.** Create a free [Ayrshare account](https://app.ayrshare.com).
+
    ![alt Social Accounts Setup](https://www.ayrshare.com/wp-content/uploads/2020/09/ayrshare-login-1.jpg)
 
-2. Enable your social media accounts such as Twitter, Facebook, LinkedIn, Reddit, Instagram, or Telegram in the Ayrshare dashboard.
-   
-   ![alt Social Accounts Setup](https://www.ayrshare.com/wp-content/uploads/2020/12/ayrshare-api-key-scaled-1.jpg)
+**2.** Enable your social media accounts such as Twitter, Facebook, LinkedIn, Reddit, Instagram, or Telegram in the Ayrshare dashboard.
 
-3. Copy your API Key from the Ayrshare dashboard. Used for authentication.
-   
-   ![alt API Key](https://www.ayrshare.com/wp-content/uploads/2020/12/ayrshare-social-scaled-1.jpg)
+   ![alt Social Accounts Setup](https://www.ayrshare.com/wp-content/uploads/2020/12/ayrshare-social-scaled-1.jpg)
+  
+**3.** Copy your API Key from the Ayrshare dashboard. Used for authentication.
+
+   ![alt API Key](https://www.ayrshare.com/wp-content/uploads/2020/12/ayrshare-api-key-scaled-1.jpg)
+
 
 
 ## Getting Started
