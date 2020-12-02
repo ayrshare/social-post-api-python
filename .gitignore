@@ -1,3 +1,7 @@
 ./dist
+<<<<<<< HEAD
 ./build
 API-KEY.json
+=======
+./build
+>>>>>>> 7f3d39f (first commit)
