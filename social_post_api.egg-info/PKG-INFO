@@ -1,7 +1,7 @@
 Metadata-Version: 2.1
 Name: social-post-api
-Version: 0.1.4
-Summary: Automate social media posting via an API for your company or clients
+Version: 0.1.5
+Summary: Automate social media posts via Ayrshare's API for your company or clients. Post to Instagram, Twitter, Facebook, LinkedIn, Telegram, and Reddit.
 Home-page: https://github.com/nevermind-solutions/social-post-api-python
 Author: Ayrshare
 Author-email: contact@ayrshare.com
@@ -35,6 +35,7 @@ Description: # Automated Social Media Posting APIs
            ![alt API Key](https://www.ayrshare.com/wp-content/uploads/2020/12/ayrshare-api-key-scaled-1.jpg)
         
         
+        
         ## Getting Started
         
         ### Initialize Social Post API
@@ -57,6 +58,13 @@ Description: # Automated Social Media Posting APIs
         # Post to Platforms Twitter, Facebook, and LinkedIn
         postResult = social.post({'post': 'Nice Posting 2', 'platforms': ['twitter', 'facebook', 'linkedin']})
         print(postResult)
+        
+        # Delete
+        deleteResult = social.delete({'id': postResult['id']})
+        print(deleteResult)
+        
+        # History
+        print(social.history())
         ```
         
         
