@@ -1,6 +1,10 @@
+import json
 from ayrshare import SocialPost
 
-social = SocialPost('AJ3PGW1-8HZM8R4-GCWTVJW-YE153PE')
+with open('./API-KEY.json') as f:
+  API_KEY = json.load(f)
+
+social = SocialPost(API_KEY["key"])
 
 # Post to Platforms
 postResult = social.post({'post': 'Nice Posting 2', 'platforms': ['twitter']})
