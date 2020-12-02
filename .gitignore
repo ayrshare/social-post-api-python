@@ -3,3 +3,4 @@ API-KEY.json
 ./build
 ./social_post_api.egg-info
 ./social_media_api.egg-info
+*bfg-report*
