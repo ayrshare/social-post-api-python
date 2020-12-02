@@ -1,5 +1,13 @@
+<<<<<<< HEAD
 ./dist
 API-KEY.json
 ./build
 ./social_post_api.egg-info
 ./social_media_api.egg-info
+=======
+dist
+build
+API-KEY.json
+social_post_api.egg-info
+social_media_api.egg-info
+>>>>>>> 5955e3d (updated)
