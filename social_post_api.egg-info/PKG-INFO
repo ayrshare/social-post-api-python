@@ -1,8 +1,8 @@
 Metadata-Version: 2.1
 Name: social-post-api
-Version: 0.1.5
+Version: 0.1.6
 Summary: Automate social media posts via Ayrshare's API for your company or clients. Post to Instagram, Twitter, Facebook, LinkedIn, Telegram, and Reddit.
-Home-page: https://github.com/nevermind-solutions/social-post-api-python
+Home-page: https://github.com/ayrshare/social-post-api-python
 Author: Ayrshare
 Author-email: contact@ayrshare.com
 License: Apache License 2.0
