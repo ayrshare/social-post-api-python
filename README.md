@@ -239,4 +239,6 @@ Additional examples, responses, etc. can be found at:
 
 [RESTful API Endpoint Docs](https://docs.ayrshare.com/rest-api/endpoints)
 
+[GitHub](https://github.com/ayrshare/social-post-api-python)
+
 Please [contact us](mailto:contact@ayrshare.com) with your questions, or just to give us shout-out 📢!

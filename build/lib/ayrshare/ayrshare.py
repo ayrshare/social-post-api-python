@@ -5,7 +5,7 @@ base = 'https://app.ayrshare.com/api/'
 
 ERROR_MSG = {
     "status": "error",
-    "message": "Wrong parameters. Please check at https://docs.ayrshare.com/rest-api/endpoints",
+    "message": "Wrong parameters. Please verify at https://docs.ayrshare.com/rest-api/endpoints",
 }
 
 def doPost(type, data, headerData):
@@ -14,20 +14,17 @@ def doPost(type, data, headerData):
     r = requests.post(base + type, json=payload, headers=headers)
     return r.json()
 
-
 def doGet(type, params, headerData):
     headers = headerData
     r = requests.get("{}{}?{}".format(
         base, type, urlencode(params)), headers=headers)
     return r.json()
 
-
 def doDelete(type, data, headerData):
     payload = data
     headers = headerData
     r = requests.delete(base + type, json=payload, headers=headers)
     return r.json()
-
 
 class SocialPost:
     def __init__(self, API_KEY):

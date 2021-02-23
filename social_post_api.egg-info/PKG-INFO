@@ -1,8 +1,8 @@
 Metadata-Version: 2.1
 Name: social-post-api
-Version: 0.1.7
+Version: 1.0.1
 Summary: Automate social media posts via Ayrshare's API for your company or users. Post to Instagram, Twitter, Facebook, YouTube, LinkedIn, Telegram, and Reddit.
-Home-page: https://github.com/ayrshare/social-post-api-python
+Home-page: https://www.ayrshare.com
 Author: Ayrshare
 Author-email: contact@ayrshare.com
 License: Apache License 2.0
@@ -246,6 +246,8 @@ Description: # Automated Social Media Posting APIs
         Additional examples, responses, etc. can be found at:
         
         [RESTful API Endpoint Docs](https://docs.ayrshare.com/rest-api/endpoints)
+        
+        [GitHub](https://github.com/ayrshare/social-post-api-python)
         
         Please [contact us](mailto:contact@ayrshare.com) with your questions, or just to give us shout-out 📢!
         
