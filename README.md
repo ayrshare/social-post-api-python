@@ -2,7 +2,9 @@
 
 <img src="https://www.ayrshare.com/wp-content/uploads/2020/08/ayr-logo-2156-reduced.png" width="400">
 
-Social Post API is a client for [Ayrshare's](https://www.ayrshare.com) APIs. Ayrshare is a powerful set of APIs that enable you to automate server-side social media posts to Twitter, Instagram, Facebook, LinkedIn, Reddit, and Telegram for yourself, company, or clients. The Ayrshare API handles all the setup and maintenance for the social media networks. One API to rule them all (yeah, went there). See the [full list of features](https://docs.ayrshare.com/rest-api/overview).
+Social Post API is a client for [Ayrshare's](https://www.ayrshare.com) APIs. Ayrshare is a powerful set of APIs that enable you to automate server-side social media posts to *Twitter*, *Instagram*, *Facebook*, *LinkedIn*, *YouTube*, *Reddit*, and *Telegram* for your company on behalf of your users. 
+
+The Ayrshare API handles all the setup and maintenance for the social media networks. One API to rule them all (yeah, went there). See the [full list of features](https://docs.ayrshare.com/rest-api/overview).
 
 If you have a platform or manage multiple clients [contact us](https://www.ayrshare.com/business-plan-for-all-your-clients/) about the business plan.
 
@@ -163,12 +165,19 @@ shortenResponse = social.shorten({
 
 ### Analytics
 
-Get analytics on shortened links: clicked and source of clicks for iOS, Android, or Desktop.
+Get analytics on shortened links, share, likes, and impressions.
 
 ``` python
-analytics = social.analytics({
+analytics = social.analyticsLinks({
   # Optional range 1-7, default 1 day.
   'lastDays': 3
+})
+```
+
+``` python
+analytics = social.analyticsPost({
+  'id': 'Post ID',
+  'platforms': ['twitter', 'linkedin']
 })
 ```
 

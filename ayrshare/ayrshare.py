@@ -42,7 +42,7 @@ class SocialPost:
         return doPost("post", data, self.headers)
 
     def delete(self, data):
-        if "id" not in data and "bulk" not in data:
+        if "id" not in data or "bulk" not in data:
             return ERROR_MSG
 
         return doDelete("delete", data, self.headers)
@@ -53,8 +53,14 @@ class SocialPost:
     def media(self, params={}):
         return doGet("media", params, self.headers)
 
-    def analytics(self, params={}):
-        return doGet("analytics", params, self.headers)
+    def analyticsLinks(self, params={}):
+        return doGet("analytics/links", params, self.headers)
+
+    def analyticsPost(self, data):
+        if "id" not in data:
+            return ERROR_MSG
+
+        return doPost("analytics/post", data, self.headers)
 
     def user(self, params={}):
         return doGet("user", params, self.headers)
