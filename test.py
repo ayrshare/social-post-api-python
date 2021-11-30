@@ -1,19 +1,19 @@
-import json
+import json, pprint
 from ayrshare import SocialPost
 
+# Add your API Key in a file names API-KEY.json { 'key': 'API KEY'}
 with open('./API-KEY.json') as f:
     API_KEY = json.load(f)
 
 social = SocialPost(API_KEY["key"])
+pp = pprint.PrettyPrinter(indent=4)
 
 # Post to Platforms
-# postResult = social.post({'post': 'I want to see more', 'platforms': ['twitter']})
-# print(postResult)
-# print(postResult['id'])
+postResult = social.post({'post': 'The best post ever!', 'platforms': ['twitter']})
+print(postResult)
 
 # Delete the Post
-# deleteResult = social.delete({'id': postResult['id']})
-deleteResult = social.delete({'id': "NzFIBXhD4pd1N5r2LtCu"})
+deleteResult = social.delete({'id': postResult['id']})
 print(deleteResult)
 
 # Get History

@@ -1,4 +1,6 @@
 New Setup: python3 setup.py install
+pip3 install twine
+
 python3 setup.py sdist bdist_wheel
 twine upload --repository-url https://test.pypi.org/legacy/ dist/*
-twine upload dist/*
+twine upload --skip-existing dist/*

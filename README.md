@@ -1,14 +1,16 @@
-# Automated Social Media Posting APIs
+# Social Media Posting and Scheduling APIs
 
 <img src="https://www.ayrshare.com/wp-content/uploads/2020/08/ayr-logo-2156-reduced.png" width="400">
 
-Social Post API is a client for [Ayrshare's](https://www.ayrshare.com) Social Media APIs. Ayrshare is a powerful set of APIs that enable you to automate server-side social media posts to *Twitter*, *Instagram*, *Facebook*, *LinkedIn*, *YouTube*, *Pinterest*, *Reddit*, and *Telegram* for your company or on behalf of your users.
+Social Post API is a wrapper SDK for [Ayrshare's APIs](https://www.ayrshare.com).
 
-The Ayrshare API handles all the setup and maintenance for the social media networks. One API to rule them all (yeah, went there). See the [full list of features](https://docs.ayrshare.com/rest-api/overview).
+Ayrshare is a powerful set of APIs that enable you to send social media posts, get analytics, and add comments to *Twitter*, *Instagram*, *Facebook*, *LinkedIn*, *YouTube*, *Google My Business*, *Pinterest*, *Reddit*, and *Telegram* on behalf of your users.
 
-If you have a platform or manage multiple users [contact us](https://www.ayrshare.com/business-plan-for-multiple-users/) about the business plan.
+The Ayrshare API handles all the setup and maintenance for the social media networks. One API to rule them all (yeah, went there). See the full list of [full list of features](https://docs.ayrshare.com/rest-api/overview).
 
-Also, check out our [video](https://youtu.be/WQTQmjvqvMM) of installing and using the package.
+Get started with a [free plan](https://www.ayrshare.com/pricing), or if you have a platform or manage multiple users check out the [Business Plan](https://www.ayrshare.com/business-plan-for-multiple-users/).
+
+For more information on setup, see our installation [video](https://youtu.be/WQTQmjvqvMM) or our [Quick Start Guide](https://docs.ayrshare.com/quick-start-guide).
 
 ## Installation
 
@@ -71,29 +73,29 @@ Published a new post to the specified social networks either immediately or at s
 ``` python
 postResponse = social.post({
     # Required
-    'post': "Best post ever!",
+    'post': 'Best post ever!',
 
-	# Required: Social media platforms to post.
-	# Accepts an array of strings with values: "facebook", "twitter", "linkedin", "reddit", or "telegram".
-    'platforms': ["twitter", "facebook", "linkedin", "pinterest", "telegram", "reddit"],
+  # Required: Social media platforms to post.
+  # Accepts an array of strings with values: "facebook", "twitter", "linkedin", "pinterest", "reddit", or "telegram".
+    'platforms': ['twitter', 'facebook', 'linkedin', 'pinterest', 'telegram', 'reddit'],
 
-	# Optional: URLs of images to include in the post or for Instagram
-	'media_urls': ["https://myimage.com/image.png"],
+  # Optional: URLs of images to include in the post or for Instagram
+  'media_urls': ['https://myimage.com/image.png'],
 
-	# Optional: Datetime to schedule a future post. 
-	# Accepts an ISO-8601 UTC date time in format "YYYY-MM-DDThh:mm:ssZ". Example: 2021-07-08T12:30:00Z
-	'scheduleDate': "2020-08-07T15:17:00Z",
+  # Optional: Datetime to schedule a future post. 
+  # Accepts an ISO-8601 UTC date time in format "YYYY-MM-DDThh:mm:ssZ". Example: 2021-07-08T12:30:00Z
+  'scheduleDate': '2020-08-07T15:17:00Z',
 
-	# Required if platform includes "reddit." Title of Reddit post.
-	'title': "My Reddit Post",
+  # Required if platform includes "reddit." Title of Reddit post.
+  'title': 'My Reddit Post',
 
-	# Required if platform includes "reddit." Subreddit to post.
-	'subreddit': "test",
+  # Required if platform includes "reddit." Subreddit to post.
+  'subreddit': 'test',
 
-	# Optional: Shorten links in the post for all platforms similar to bit.ly.
-	# Only URLS starting with http or https will be shortened. Default value: true.
-	'shorten_links': true
-  })
+  # Optional: Shorten links in the post for all platforms similar to bit.ly.
+  # Only URLS starting with http or https will be shortened. Default value: true.
+  'shorten_links': true
+})
 ```
 
 ### Delete
@@ -103,8 +105,8 @@ Delete a post with a given post ID, obtained from the "post" response. Returns a
 ``` python
 deleteResponse = social.delete({
     # Required
-    'id': "POST ID",                          # optional, but required if "bulk" not present
-    'bulk': ["Post ID 1", "Post ID 2", ...]   # optional, but required if "id" not present
+    'id': 'POST ID',                          # optional, but required if "bulk" not present
+    'bulk': ['Post ID 1', 'Post ID 2', ...]   # optional, but required if "id" not present
   })
 ```
 
@@ -125,14 +127,14 @@ Upload and store a new image. Returns a URL referencing the image. Can be used i
 
 ``` python
 uploadResponse = social.upload({
-	# Required: The image as a Base64 encoded string. Example encoding: https://www.base64-image.de/
-	'file': "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQ...",
+  # Required: The image as a Base64 encoded string. Example encoding: https://www.base64-image.de/
+  'file': 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQ...',
 
-	# Optional
-	'fileName': "test.png",
+  # Optional
+  'fileName': 'test.png',
 
-	# Optional
-    'description': "best image"
+  # Optional
+    'description': 'best image'
 })
 ```
 
@@ -159,7 +161,7 @@ Shorten a URL and return the shortened URL.
 ``` python
 shortenResponse = social.shorten({
     # Required: URL to shorten
-    'url': "https://theURLtoShorten.com/whatmore",
+    'url': 'https://theURLtoShorten.com/whatmore',
   })
 ```
 
@@ -187,13 +189,13 @@ Add a new RSS or Substack feed to auto post all new articles. Returns a promise 
 
 ``` python
 feedResponse = social.feedAdd({
-	# Required: URL to shorten
-	'url': "https://theRSSFeed",
+  # Required: URL to shorten
+  'url': 'https://theRSSFeed',
 
-	# Optional: Value: "rss" or "substack". 
-	# If not set, defaults to "rss"
-    'type': "RSS",
-  })
+  # Optional: Value: "rss" or "substack". 
+  # If not set, defaults to "rss"
+    'type': 'RSS',
+})
 ```
 
 ### Delete an RSS or Substack Feed
@@ -202,9 +204,33 @@ Delete an RSS feed for a given ID.
 
 ``` python
 feedResponse = social.feedDelete({
-	# Required: ID of the feed
-	'id': "Feed ID",
-  })
+  # Required: ID of the feed
+  'id': 'Feed ID',
+})
+```
+
+### Get Commnets
+
+Get Comments for a Post
+
+``` python
+getCommentsResponse = social.getComments({
+  # Required: ID of the Post
+  'id': 'Post Id',
+})
+```
+
+### Post a Comment
+
+Add a comment to a Post
+
+``` python
+postCommentResponse = social.postComment({
+  # Required: ID of the Post
+  'id': 'Post Id',
+  'platforms': ['facebook', 'instagram'],
+  'comment': 'The best comment ever!',
+})
 ```
 
 ## Business Plan Functions for Multiple Clients - Business Plan Required
@@ -218,8 +244,8 @@ Create a new account profile under the primary account
 ``` python
 createProfileResponse = social.createProfile({
     # Required: title
-    'title': "New Profile Title",
-  })
+    'title': 'New Profile Title',
+})
 ```
 
 ### Delete Profile
@@ -229,11 +255,32 @@ Delete a profile owned by the primary account
 ``` python
 deleteProfileResponse = social.deleteProfile({
     # Required: profileKey - the API Key of the profile to delete
-    'profileKey': "JI9s-kJII-9283-OMKM",
+    'profileKey': 'JI9s-kJII-9283-OMKM',
   })
 ```
 
-## Additional Information and Support
+### Generate JWT URL for SSO
+
+Generate an SSO link. Please see integration guide provided with the Business Plan.
+
+``` python
+generateJWTResponse = social.generateJWT({
+    'domain': 'mydomin',
+    'privateKey': 'private key data...',
+    'profileKey': 'JI9s-kJII-9283-OMKM',
+  })
+```
+
+### Additional Calls
+
+- registerWebhook
+- unregisterWebhook
+- listWebhook
+- setAutoSchedule
+- deleteAutoSchedule
+- listAutoSchedule
+
+### Information and Support
 
 Additional examples, responses, etc. can be found at:
 
