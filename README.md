@@ -2,11 +2,11 @@
 
 <img src="https://www.ayrshare.com/wp-content/uploads/2020/08/ayr-logo-2156-reduced.png" width="400">
 
-Social Post API is a client for [Ayrshare's](https://www.ayrshare.com) APIs. Ayrshare is a powerful set of APIs that enable you to automate server-side social media posts to *Twitter*, *Instagram*, *Facebook*, *LinkedIn*, *YouTube*, *Reddit*, and *Telegram* for your company on behalf of your users. 
+Social Post API is a client for [Ayrshare's](https://www.ayrshare.com) Social Media APIs. Ayrshare is a powerful set of APIs that enable you to automate server-side social media posts to *Twitter*, *Instagram*, *Facebook*, *LinkedIn*, *YouTube*, *Pinterest*, *Reddit*, and *Telegram* for your company or on behalf of your users.
 
 The Ayrshare API handles all the setup and maintenance for the social media networks. One API to rule them all (yeah, went there). See the [full list of features](https://docs.ayrshare.com/rest-api/overview).
 
-If you have a platform or manage multiple clients [contact us](https://www.ayrshare.com/business-plan-for-all-your-clients/) about the business plan.
+If you have a platform or manage multiple users [contact us](https://www.ayrshare.com/business-plan-for-multiple-users/) about the business plan.
 
 Also, check out our [video](https://youtu.be/WQTQmjvqvMM) of installing and using the package.
 
@@ -75,7 +75,7 @@ postResponse = social.post({
 
 	# Required: Social media platforms to post.
 	# Accepts an array of strings with values: "facebook", "twitter", "linkedin", "reddit", or "telegram".
-    'platforms': ["twitter", "facebook", "linkedin", "telegram", "reddit"],
+    'platforms': ["twitter", "facebook", "linkedin", "pinterest", "telegram", "reddit"],
 
 	# Optional: URLs of images to include in the post or for Instagram
 	'media_urls': ["https://myimage.com/image.png"],
@@ -209,7 +209,7 @@ feedResponse = social.feedDelete({
 
 ## Business Plan Functions for Multiple Clients - Business Plan Required
 
-See [here](https://www.ayrshare.com/business-plan-for-all-your-clients/) for more information
+See [here](https://www.ayrshare.com/business-plan-for-multiple-users/) for more information
 
 ### Create Profile
 

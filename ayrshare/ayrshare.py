@@ -39,10 +39,10 @@ class SocialPost:
         return doPost("post", data, self.headers)
 
     def delete(self, data):
-        if "id" not in data or "bulk" not in data:
+        if "id" in data or "bulk" in data:
+            return doDelete("delete", data, self.headers)
+        else:
             return ERROR_MSG
-
-        return doDelete("delete", data, self.headers)
 
     def history(self, params={}):
         return doGet("history", params, self.headers)
