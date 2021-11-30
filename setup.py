@@ -3,15 +3,15 @@ from setuptools import setup, find_packages
 
 HERE = pathlib.Path(__file__).parent
 
-VERSION = '1.0.1'
+VERSION = '1.0.2'
 PACKAGE_NAME = 'social-post-api'
 AUTHOR = 'Ayrshare'
 AUTHOR_EMAIL = 'contact@ayrshare.com'
 URL = 'https://www.ayrshare.com'
 
 LICENSE = 'Apache License 2.0'
-DESCRIPTION = 'Automate social media posts via Ayrshare\'s API for your company or users. Post to Instagram, Twitter, Facebook, YouTube, LinkedIn, Telegram, and Reddit.'
-KEYWORDS = "Ayrshare Social Media API Posting Networks Automation Agency Multiple Users Instagram YouTube Twitter Facebook LinkedIn Reddit Telegram"
+DESCRIPTION = 'Automate social media posts via Ayrshare\'s API for your company or users. Post to Instagram, Twitter, Facebook, YouTube, LinkedIn, Google My Business, Telegram, and Reddit.'
+KEYWORDS = "Ayrshare Social Media API Posting Networks Automation Agency CMS Platform Multiple Users Instagram YouTube Twitter Facebook LinkedIn Reddit Telegram GMB"
 HOMEPAGE = "https://www.ayrshare.com"
 LONG_DESCRIPTION = (HERE / "README.md").read_text()
 LONG_DESC_TYPE = "text/markdown"
