@@ -16,8 +16,8 @@ LONG_DESCRIPTION = (HERE / "README.md").read_text()
 LONG_DESC_TYPE = "text/markdown"
 PROJECT_URLS={
     'Documentation': 'https://docs.ayrshare.com',
-    'Source': 'https://github.com/ayrshare/social-post-api-python'
-},
+    'Source': 'https://github.com/ayrshare/social-post-api-python',
+}
 
 INSTALL_REQUIRES = [
     'requests'
