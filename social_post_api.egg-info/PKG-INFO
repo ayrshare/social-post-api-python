@@ -1,28 +1,28 @@
 Metadata-Version: 2.1
 Name: social-post-api
-Version: 1.1.0
-Summary: Automate social media posts via Ayrshare's API for your company or users. Post to Instagram, Twitter, Facebook, YouTube, LinkedIn, Google My Business, Pinterest, Telegram, and Reddit.
+Version: 1.1.1
+Summary: Social Media API: Schedule posts, get analytics, add comments for Instagram, Twitter, Facebook, YouTube, LinkedIn, Google My Business, Pinterest, Telegram, TikTok, and Reddit.
 Home-page: https://www.ayrshare.com
 Author: Ayrshare
-Author-email: contact@ayrshare.com
+Author-email: support@ayrshare.com
 License: Apache License 2.0
-Keywords: Ayrshare,Social Media API,Social Networks,Social Media Management,Socia Posting,Social Automation,Agency Social,Multiple User Posting,Instagram,YouTube API,Twitter API,Facebook API,LinkedIn API,Reddit API,Telegram API,Pinterest API,Google My Business API
+Keywords: Ayrshare,Social Media API,Social Networks,Social Media Management,Social API,Social Posting,Social Analytics,Social Automation,Agency Social,Multiple User Posting,Instagram,YouTube API,Twitter API,Facebook API,LinkedIn API,Reddit API,Telegram API,Pinterest API,Google My Business API,TikTok API
 Platform: UNKNOWN
 Description-Content-Type: text/markdown
 
-# Social Media Posting and Scheduling APIs
+# Social Media APIs for Posting, Scheduling, and Analytics
 
 <img src="https://www.ayrshare.com/wp-content/uploads/2020/08/ayr-logo-2156-reduced.png" width="400">
 
-Social Post API is a wrapper SDK for [Ayrshare's APIs](https://www.ayrshare.com).
+The Social Media API is a wrapper SDK for [Ayrshare's APIs](https://www.ayrshare.com).
 
-Ayrshare is a powerful set of APIs that enable you to send social media posts, get analytics, and add comments to *Twitter*, *Instagram*, *Facebook*, *LinkedIn*, *YouTube*, *Google My Business*, *Pinterest*, *Reddit*, and *Telegram* on behalf of your users.
+Ayrshare is a powerful set of APIs that enable you to send social media posts, get analytics, and add comments to *Twitter*, *Instagram*, *Facebook*, *LinkedIn*, *YouTube*, *Google My Business*, *Pinterest*, *TikTok*, *Reddit*, and *Telegram* on behalf of your users or clients.
 
-The Ayrshare API handles all the setup and maintenance for the social media networks. One API to rule them all (yeah, went there). See the full list of [full list of features](https://docs.ayrshare.com/rest-api/overview).
+The Ayrshare Social API handles all the setup and maintenance for the social media networks. One API to rule them all (yeah, went there). See the full list of [full list of features](https://docs.ayrshare.com/rest-api/overview).
 
 Get started with a [free plan](https://www.ayrshare.com/pricing), or if you have a platform or manage multiple users check out the [Business Plan](https://www.ayrshare.com/business-plan-for-multiple-users/).
 
-For more information on setup, see our installation [video](https://youtu.be/WQTQmjvqvMM) or our [Quick Start Guide](https://docs.ayrshare.com/quick-start-guide).
+For more information on setup, see our installation [video](https://youtu.be/G8M6DZdtcMc) or our [Quick Start Guide](https://docs.ayrshare.com/quick-start-guide).
 
 ## Installation
 
@@ -32,21 +32,19 @@ For more information on setup, see our installation [video](https://youtu.be/WQT
 
 **1.** Create a free [Ayrshare account](https://app.ayrshare.com).
 
-   ![alt Social Accounts Setup](https://www.ayrshare.com/wp-content/uploads/2020/09/ayrshare-login-1.jpg)
+   ![alt Social Accounts Setup](https://www.ayrshare.com/wp-content/uploads/2021/07/ayrshare-login.jpg)
 
-**2.** Enable your social media accounts such as Twitter, Facebook, LinkedIn, Reddit, Instagram, or Telegram in the Ayrshare dashboard.
+**2.** Enable your social media accounts such as Twitter, Facebook, LinkedIn, Reddit, Instagram, Google My Business, Telegram, TikTok, or YouTube in the Ayrshare dashboard.
 
-   ![alt Social Accounts Setup](https://www.ayrshare.com/wp-content/uploads/2020/12/ayrshare-social-scaled-1.jpg)
+   ![alt Social Accounts Setup](https://www.ayrshare.com/wp-content/uploads/social-api-linking.jpg)
   
 **3.** Copy your API Key from the Ayrshare dashboard. Used for authentication.
 
-   ![alt API Key](https://www.ayrshare.com/wp-content/uploads/2020/12/ayrshare-api-key-scaled-1.jpg)
-
-
+   ![alt API Key](https://www.ayrshare.com/wp-content/uploads/social-api-key.jpg)
 
 ## Getting Started
 
-### Initialize Social Post API
+### Initialize Social Media API
 
 Create a new Social Post object with your API Key.
 
@@ -57,7 +55,7 @@ social = SocialPost('8jKj782Aw8910dCN') # get an API Key at ayrshare.com
 
 ### History, Post, Delete Example
 
-This simple example shows how to post, get history, and delete the post. This example assumes you have a free API key from [Ayrshare](https://www.ayrshare.com) and have enabled Twitter, Facebook, and LinkedIn. Note, Instagram, Telegram and Reddit also available.
+This simple example shows how to post, get history, and delete the post. This example assumes you have a free API key from [Ayrshare](https://www.ayrshare.com) and have enabled Twitter, Facebook, and LinkedIn. Note, Instagram, Telegram, YouTube, and Reddit also available.
 
 ``` python
 from ayrshare import SocialPost
@@ -75,12 +73,11 @@ print(deleteResult)
 print(social.history())
 ```
 
-
-## API
+## Social API
 
 ### Post
 
-Published a new post to the specified social networks either immediately or at scheduled future date. Returns a promise that resolves to an object containing the post ID and post status (success, error).
+Published a new post to the specified social networks either immediately or at scheduled future date with the Social API. Returns a promise that resolves to an object containing the post ID and post status (success, error). See the [post endpoint](https://docs.ayrshare.com/rest-api/endpoints/post) for the full capabilities.
 
 ``` python
 postResponse = social.post({
@@ -89,20 +86,14 @@ postResponse = social.post({
 
   # Required: Social media platforms to post.
   # Accepts an array of strings with values: "facebook", "twitter", "linkedin", "pinterest", "reddit", or "telegram".
-    'platforms': ['twitter', 'facebook', 'linkedin', 'pinterest', 'telegram', 'reddit'],
+    'platforms': ['twitter', 'facebook', 'linkedin', 'pinterest', 'telegram', 'instagram'],
 
   # Optional: URLs of images to include in the post or for Instagram
-  'media_urls': ['https://myimage.com/image.png'],
+  'mediaUrls': ['https://img.ayrshare.com/012/gb.jpg'],
 
   # Optional: Datetime to schedule a future post. 
   # Accepts an ISO-8601 UTC date time in format "YYYY-MM-DDThh:mm:ssZ". Example: 2021-07-08T12:30:00Z
   'scheduleDate': '2020-08-07T15:17:00Z',
-
-  # Required if platform includes "reddit." Title of Reddit post.
-  'title': 'My Reddit Post',
-
-  # Required if platform includes "reddit." Subreddit to post.
-  'subreddit': 'test',
 
   # Optional: Shorten links in the post for all platforms similar to bit.ly.
   # Only URLS starting with http or https will be shortened. Default value: true.
@@ -112,7 +103,7 @@ postResponse = social.post({
 
 ### Delete
 
-Delete a post with a given post ID, obtained from the "post" response. Returns a promise with the delete status. Also, can bulk delete multiple IDs at once using the "bulk" key.
+Delete a post with a given post ID, obtained from the "post" response. Returns a promise with the delete status. Also, can bulk delete multiple IDs at once using the "bulk" key. See the [delete endpoint](https://docs.ayrshare.com/rest-api/endpoints/post#delete-a-post) for more details.
 
 ``` python
 deleteResponse = social.delete({
@@ -124,7 +115,7 @@ deleteResponse = social.delete({
 
 ### History
 
-Get a history of all posts and their current status in descending order. Returns a promise that resolves to an array of post objects.
+Get a history of all posts and their current status in descending order. Returns a promise that resolves to an array of post objects. See the [history endpoint](https://docs.ayrshare.com/rest-api/endpoints/history) for more details.
 
 ``` python
 historyResponse = social.history({
@@ -135,7 +126,7 @@ historyResponse = social.history({
 
 ### Upload Media
 
-Upload and store a new image. Returns a URL referencing the image. Can be used in "image_url" in "post".
+Upload and store a new image. Returns a URL referencing the image. Can be used in "image_url" in "post". See the [media endpoint](https://docs.ayrshare.com/rest-api/endpoints/media) for more details.
 
 ``` python
 uploadResponse = social.upload({
@@ -152,7 +143,7 @@ uploadResponse = social.upload({
 
 ### Get Media
 
-Get all media URLS. Returns a promise that resolves to an array of URL objects.
+Get all media URLS. Returns a promise that resolves to an array of URL objects. See the [media endpoint](https://docs.ayrshare.com/rest-api/endpoints/media) for more details.
 
 ``` python
 mediaResponse = social.media()
@@ -160,7 +151,7 @@ mediaResponse = social.media()
 
 ### User
 
-Get data about the logged in user, such as post quota, used quota, active social networks, and created date.
+Get data about the logged in user, such as post quota, used quota, active social networks, and created date. See the [user endpoint](https://docs.ayrshare.com/rest-api/endpoints/user) for more details.
 
 ``` python
 user = social.user()
@@ -168,7 +159,7 @@ user = social.user()
 
 ### Shorten URL
 
-Shorten a URL and return the shortened URL.
+Shorten a URL and return the shortened URL. See the [shorten endpoint](https://docs.ayrshare.com/rest-api/endpoints/shorten) for more details.
 
 ``` python
 shortenResponse = social.shorten({
@@ -179,7 +170,7 @@ shortenResponse = social.shorten({
 
 ### Analytics
 
-Get analytics on shortened links, share, likes, and impressions.
+Get analytics on shortened links and shares, likes, shares, and impressions with for a post or at the accounts level. See the [analytics endpoint](https://docs.ayrshare.com/rest-api/endpoints/analytics) for more details.
 
 ``` python
 analytics = social.analyticsLinks({
@@ -223,7 +214,7 @@ feedResponse = social.feedDelete({
 
 ### Get Commnets
 
-Get Comments for a Post
+Get comments for a post. Currently only on Facebook and Instagram. See the [get comment endpoint](https://docs.ayrshare.com/rest-api/endpoints/comments#get-comments) for more details.
 
 ``` python
 getCommentsResponse = social.getComments({
@@ -234,7 +225,7 @@ getCommentsResponse = social.getComments({
 
 ### Post a Comment
 
-Add a comment to a Post
+Add a comment to a post. Currently only on Facebook and Instagram. See the [create comment endpoint](https://docs.ayrshare.com/rest-api/endpoints/comments#post-a-comment) for more details.
 
 ``` python
 postCommentResponse = social.postComment({
@@ -245,13 +236,13 @@ postCommentResponse = social.postComment({
 })
 ```
 
-## Business Plan Functions for Multiple Clients - Business Plan Required
+## Business Functions for Multiple Users - Business or Enterprise Plan Required
 
-See [here](https://www.ayrshare.com/business-plan-for-multiple-users/) for more information
+The [Business Plan](https://www.ayrshare.com/business-plan-for-multiple-users/) allows you to create, manage, and post on behalf of client profiles via the API or Dashboard GUI. You can [integrate](https://docs.ayrshare.com/multiple-client-accounts/overview) Ayrshare into your platform, product, or agency and give your clients social media capabilites. Please [contact us](mailto:contact@ayrshare.com) with any questions.
 
 ### Create Profile
 
-Create a new account profile under the primary account
+Create a new account profile under the primary account. See the [create profile endpoint](https://docs.ayrshare.com/rest-api/endpoints/profiles#create-a-new-profile) for more details.
 
 ``` python
 createProfileResponse = social.createProfile({
@@ -262,7 +253,7 @@ createProfileResponse = social.createProfile({
 
 ### Delete Profile
 
-Delete a profile owned by the primary account
+Delete a profile owned by the primary account. See the [delete profile endpoint](https://docs.ayrshare.com/rest-api/endpoints/profiles#delete-a-profile) for more details.
 
 ``` python
 deleteProfileResponse = social.deleteProfile({
@@ -271,9 +262,9 @@ deleteProfileResponse = social.deleteProfile({
   })
 ```
 
-### Generate JWT URL for SSO
+### Generate a JWT URL
 
-Generate an SSO link. Please see integration guide provided with the Business Plan.
+Generate a JWT Token and URL used for authorizing a user's access to the Social Account linking page. See the [generate JWT endpoint](https://docs.ayrshare.com/rest-api/endpoints/profiles#generate-a-jwt) for more details.
 
 ``` python
 generateJWTResponse = social.generateJWT({
@@ -285,12 +276,16 @@ generateJWTResponse = social.generateJWT({
 
 ### Additional Calls
 
-- registerWebhook
+- [Webhooks endpoints](https://docs.ayrshare.com/rest-api/endpoints/webhooks)
 - unregisterWebhook
 - listWebhook
 - setAutoSchedule
 - deleteAutoSchedule
 - listAutoSchedule
+
+## Other Packages & Integrations
+
+We have other package and integrations such as [Node NPM](https://docs.ayrshare.com/packages/node.js-npm-package), [Bubble.io](https://docs.ayrshare.com/packages/bubble.io), and [Airtable](https://docs.ayrshare.com/packages/airtable) + examples in C#, PHP, and Go.
 
 ### Information and Support
 
@@ -300,6 +295,8 @@ Additional examples, responses, etc. can be found at:
 
 [GitHub](https://github.com/ayrshare/social-post-api-python)
 
-Please [contact us](mailto:contact@ayrshare.com) with your questions, or just to give us shout-out 📢!
+See our [changelog](https://docs.ayrshare.com/additional-info/whats-new) for the latest and greatest.
+
+Please [contact us](mailto:support@ayrshare.com) with your questions, or just to give us shout-out 📢!
 
 
