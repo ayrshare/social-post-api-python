@@ -3,5 +3,5 @@ pip3 install twine
 pip3 install wheel
 
 python3 setup.py sdist bdist_wheel
-twine upload --repository-url https://test.pypi.org/legacy/ dist/*
-twine upload --skip-existing dist/*
+For Test: twine upload --repository-url https://test.pypi.org/legacy/ dist/* --verbose
+For Release: twine upload --skip-existing dist/*
