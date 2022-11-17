@@ -10,7 +10,6 @@ ERROR_MSG = {
     "Wrong parameters. Please verify at https://docs.ayrshare.com/rest-api/endpoints",
 }
 
-
 def doPost(type, data, headerData):
     data["source"] = "pypi"
     payload = data
