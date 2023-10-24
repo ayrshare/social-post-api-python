@@ -113,6 +113,9 @@ class SocialPost:
 
         return doDelete("profiles/delete-profile", data, self.headers)
 
+    def getUserProfiles(self, params={}):
+        return doGet("profiles", params, self.headers)
+
     def generateJWT(self, data):
         if "domain" not in data or "privateKey" not in data or "profileKey" not in data:
             return ERROR_MSG

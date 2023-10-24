@@ -10,6 +10,7 @@ Project-URL: Documentation, https://docs.ayrshare.com
 Project-URL: Source, https://github.com/ayrshare/social-post-api-python
 Keywords: Ayrshare,Social Media API,Social Networks,Social Media Management,Social API,Social Posting,Social Analytics,Social Automation,Agency Social,Multiple User Posting,Instagram,YouTube API,Twitter API,Facebook API,LinkedIn API,Reddit API,Telegram API,Pinterest API,Google My Business API,TikTok API
 Description-Content-Type: text/markdown
+Requires-Dist: requests
 
 # Social Media APIs for Posting, Scheduling, and Analytics
 
@@ -298,4 +299,4 @@ Additional examples, responses, etc. can be found at:
 
 See our [changelog](https://docs.ayrshare.com/additional-info/whats-new) for the latest and greatest.
 
-Please [contact us](mailto:support@ayrshare.com) with your questions, or just to give us shout-out 📢!
+Please [contact us](mailto:support@ayrshare.com) with your questions, or just to give us shout-out ðŸ“¢!

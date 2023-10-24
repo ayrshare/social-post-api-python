@@ -18,3 +18,7 @@ print(deleteResult)
 
 # Get History
 # print(social.history())
+
+# Get profiles
+getProfiles = social.getUserProfiles()
+print(getProfiles)
