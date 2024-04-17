@@ -1,7 +1,8 @@
 import requests
 from urllib.parse import urlencode
 
-base = 'https://app.ayrshare.com/api/'
+base = 'http://localhost:5001/ayrshare-dev/us-central1/api/'
+#'https://app.ayrshare.com/api/'
 
 ERROR_MSG = {
     "status":
@@ -17,11 +18,28 @@ def doPost(type, data, headerData):
     r = requests.post(base + type, json=payload, headers=headers)
     return r.json()
 
+def doPut(type, data, headerData):
+    data["source"] = "pypi"
+    payload = data
+    headers = headerData
+    r = requests.put(base + type, json=payload, headers=headers)
+    return r.json()
+
+# Build the parameters for the request and handle arrays
+def buildParams (data) :
+    params = {}
+    for key, value in data.items():
+        if type(value) is list:
+            for i in range(len(value)):
+                params[key + "[" + str(i) + "]"] = value[i]
+        else:
+            params[key] = value
+    return params
 
 def doGet(type, params, headerData):
     params["source"] = "pypi"
     headers = headerData
-    r = requests.get("{}{}?{}".format(base, type, urlencode(params)),
+    r = requests.get("{}{}?{}".format(base, type, urlencode(buildParams(params))),
                      headers=headers)
     return r.json()
 
@@ -43,16 +61,24 @@ class SocialPost:
         }
 
     def post(self, data):
-        if "post" not in data or "platforms" not in data:
-            return ERROR_MSG
-
         return doPost("post", data, self.headers)
 
     def delete(self, data):
-        if "id" in data or "bulk" in data:
-            return doDelete("delete", data, self.headers)
-        else:
-            return ERROR_MSG
+        return doDelete("delete", data, self.headers)
+        
+    def getPost(self, data):
+        id = ""
+
+        if 'id' in data:
+            id = '/' + data.get('id')
+
+        return doGet("post" + id, data, self.headers)
+    
+    def retryPost(self, data):
+        return doPut("post/retry", data, self.headers)
+    
+    def updatePost(self, data):
+        return doPut("post", data, self.headers)
 
     def history(self, params={}):
         id = ""
@@ -64,74 +90,90 @@ class SocialPost:
 
     def media(self, params={}):
         return doGet("media", params, self.headers)
+    
+    def verifyMediaExists(self, params={}):
+        return doPost("media/urlExists", params, self.headers)
+    
+    def mediaUploadUrl(self, params={}):
+        return doGet("media/uploadUrl", params, self.headers)
+    
+    def mediaMeta(self, params={}):
+        return doGet("media/meta", params, self.headers)
+    
+    def resizeImage(self, data):
+        return doPost("media/resize", data, self.headers)
 
     def analyticsLinks(self, params={}):
         return doGet("analytics/links", params, self.headers)
 
     def analyticsPost(self, data):
-        if "id" not in data:
-            return ERROR_MSG
-
         return doPost("analytics/post", data, self.headers)
+    
+    def analyticsSocial(self, params={}):
+        return doPost("analytics/social", params, self.headers)
 
     def user(self, params={}):
         return doGet("user", params, self.headers)
 
     def upload(self, data):
-        if "file" not in data:
-            return ERROR_MSG
-
         return doPost("upload", data, self.headers)
 
     def shorten(self, data):
-        if "url" not in data:
-            return ERROR_MSG
-
         return doPost("shorten", data, self.headers)
 
     def addFeed(self, data):
-        if "url" not in data:
-            return ERROR_MSG
-
         return doPost("feed", data, self.headers)
 
     def deleteFeed(self, data):
-        if "id" not in data:
-            return ERROR_MSG
-
         return doDelete("feed", data, self.headers)
+    
+    def getFeeds(self, params={}):
+        return doGet("feed", params, self.headers)
+    
+    def updateFeed(self, data):
+        return doPut("feed", data, self.headers)
 
     def createProfile(self, data):
-        if "title" not in data:
-            return ERROR_MSG
-
         return doPost("profiles/create-profile", data, self.headers)
 
     def deleteProfile(self, data):
-        if "profileKey" not in data:
-            return ERROR_MSG
-
         return doDelete("profiles/delete-profile", data, self.headers)
+    
+    def updateProfile(self, data):
+        return doPut("profiles/profile", data, self.headers)
+    
+    def getProfiles(self, params={}):
+        return doGet("profiles", params, self.headers)
 
     def generateJWT(self, data):
-        if "domain" not in data or "privateKey" not in data or "profileKey" not in data:
-            return ERROR_MSG
-
         return doPost("profiles/generateJWT", data, self.headers)
+    
+    def unlinkSocial(self, data):
+        return doDelete("profiles/social", data, self.headers)
 
     def postComment(self, data):
-        if "id" not in data or "platforms" not in data or "comment" not in data:
-            return ERROR_MSG
-
         return doPost("comments", data, self.headers)
 
     def getComments(self, params={}):
-        return doGet("comments", params, self.headers)
+        id = ""
+
+        if 'id' in params:
+            id = '/' + params.get('id')
+
+        return doGet("comments" + id, params, self.headers)
+    
+    def deleteComments(self, data):
+        id = ""
+
+        if 'id' in data:
+            id = '/' + data.get('id')
+
+        return doDelete("comments" + id, data, self.headers)
+    
+    def replyComment(self, data):
+        return doPost("comments/reply", data, self.headers)
 
     def setAutoSchedule(self, data):
-        if "schedule" not in data:
-            return ERROR_MSG
-
         return doPost("auto-schedule/set", data, self.headers)
 
     def deleteAutoSchedule(self, data):
@@ -142,18 +184,67 @@ class SocialPost:
         return doGet("auto-schedule/list", params, self.headers)
 
 
-    def registerWebook(self, data):
-        if "action" not in data or "url" not in data:
-            return ERROR_MSG
-
+    def registerWebhook(self, data):
         return doPost("hook/webhook", data, self.headers)
 
     def unregisterWebhook(self, data):
-        if "action" not in data:
-            return ERROR_MSG
-
         return doDelete("hook/webhook", data, self.headers)
 
     def listWebhooks(self, params={}):
         return doGet("hook/webhook", params, self.headers)
+    
+    def getBrandByUser(self, params={}):
+        return doGet("brand/byUser", params, self.headers)
+    
+    def generatePost(self, params):
+        return doPost("generate/post", params, self.headers)
+    
+    def generateRewrite(self, params):
+        return doPost("generate/rewrite", params, self.headers)
+    
+    def generateTranscription(self, params):
+        return doPost("generate/transcription", params, self.headers)
+    
+    def generateTranslation(self, params):
+        return doPost("generate/translate", params, self.headers)
+    
+    def generateAltText(self, params):
+        return doPost("generate/altText", params, self.headers)
+    
+    def autoHashtags(self, params):
+        return doPost("hashtags/auto", params, self.headers)
+    
+    def recommendHashtags(self, params):
+        return doGet("hashtags/recommend", params, self.headers)
+    
+    def checkBannedHashtags(self, params):
+        return doGet("hashtags/banned", params, self.headers)
+    
+    def shortLink(self, params):
+        return doPost("links", params, self.headers)
+    
+    def shortLinkAnalytics(self, params):
+        id = ""
+
+        if 'id' in params:
+            id = '/' + params.get('id')
+
+        return doGet("links" + id, params, self.headers)
+    
+    def reviews(self, params):
+        return doGet("reviews", params, self.headers)
+    
+    def review(self, params):
+        id = ""
+
+        if 'id' in params:
+            id = '/' + params.get('id')
+
+        return doGet("reviews" + id, params, self.headers)
+    
+    def reviewReply(self, params):
+        return doPost("reviews", params, self.headers)
+    
+    def deleteReviewReply(self, params):
+        return doDelete("reviews", params, self.headers)
 
