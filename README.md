@@ -1,10 +1,10 @@
 # Social Media APIs for Posting, Scheduling, and Analytics
 
-<img src="https://www.ayrshare.com/wp-content/uploads/2020/08/ayr-logo-2156-reduced.png" width="400">
+![Ayrshare logo](https://www.ayrshare.com/wp-content/uploads/2020/08/ayr-logo-2156-reduced.png)
 
 The Social Media API is a wrapper SDK for [Ayrshare's APIs](https://www.ayrshare.com).
 
-Ayrshare is a powerful set of APIs that enable you to send social media posts, get analytics, and add comments to *Twitter*, *Instagram*, *Facebook*, *LinkedIn*, *YouTube*, *Google My Business*, *Pinterest*, *TikTok*, *Reddit*, and *Telegram* on behalf of your users or clients.
+Ayrshare is a powerful set of APIs that enable you to send social media posts, get analytics, and manage comments to *X/Twitter*, *Instagram*, *Facebook*, *LinkedIn*, *YouTube*, *Google Busienss Profile*, *Pinterest*, *TikTok*, *Reddit*, and *Telegram* on behalf of your users or clients.
 
 The Ayrshare Social API handles all the setup and maintenance for the social media networks. One API to rule them all (yeah, went there). See the full list of [full list of features](https://docs.ayrshare.com/rest-api/overview).
 
@@ -20,15 +20,15 @@ For more information on setup, see our installation [video](https://youtu.be/G8M
 
 **1.** Create a free [Ayrshare account](https://app.ayrshare.com).
 
-   ![alt Social Accounts Setup](https://www.ayrshare.com/wp-content/uploads/2021/07/ayrshare-login.jpg)
+   ![alt Social Accounts Setup](https://www.ayrshare.com/wp-content/uploads/Ayrshare-login.png)
 
-**2.** Enable your social media accounts such as Twitter, Facebook, LinkedIn, Reddit, Instagram, Google My Business, Telegram, TikTok, or YouTube in the Ayrshare dashboard.
+**2.** Enable your social media accounts such as C/Twitter, Facebook, LinkedIn, Reddit, Instagram, Google Business Profile, Telegram, TikTok, or YouTube in the Ayrshare dashboard.
 
-   ![alt Social Accounts Setup](https://www.ayrshare.com/wp-content/uploads/social-api-linking.jpg)
+   ![alt Social Accounts Setup](https://www.ayrshare.com/wp-content/uploads/Ayrshare-social-linking.png)
   
 **3.** Copy your API Key from the Ayrshare dashboard. Used for authentication.
 
-   ![alt API Key](https://www.ayrshare.com/wp-content/uploads/social-api-key.jpg)
+   ![alt API Key](https://www.ayrshare.com/wp-content/uploads/Ayrshare-API-key.png)
 
 ## Getting Started
 
@@ -38,12 +38,12 @@ Create a new Social Post object with your API Key.
 
 ``` python
 from ayrshare import SocialPost
-social = SocialPost('8jKj782Aw8910dCN') # get an API Key at ayrshare.com
+social = SocialPost('DJED-DKEP-SJWK-WJKS') # get an API Key at ayrshare.com
 ```
 
 ### History, Post, Delete Example
 
-This simple example shows how to post, get history, and delete the post. This example assumes you have a free API key from [Ayrshare](https://www.ayrshare.com) and have enabled Twitter, Facebook, and LinkedIn. Note, Instagram, Telegram, YouTube, and Reddit also available.
+This simple example shows how to post, get history, and delete the post. This example assumes you have a free API key from [Ayrshare](https://www.ayrshare.com) and have enabled X/Twitter, Facebook, and LinkedIn. Note, Instagram, Telegram, YouTube, TikTok, and Reddit also available.
 
 ``` python
 from ayrshare import SocialPost
@@ -514,6 +514,7 @@ generatePostResponse = social.generatePost({
 ```
 
 ### Generate Rewrite
+
 Generate variations of a social media post using ChatGPT. Token limits applicable. See the [generate rewrite endpoint](https://docs.ayrshare.com/rest-api/endpoints/generate#rewrite-a-post-1) for more details.
 
 ``` python
