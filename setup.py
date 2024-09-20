@@ -11,7 +11,7 @@ URL = 'https://www.ayrshare.com'
 
 LICENSE = 'Apache License 2.0'
 DESCRIPTION = 'Social Media API: Schedule posts, get analytics, manage comments for Instagram, X/Twitter, Facebook, YouTube, LinkedIn, Google Business Profile, Pinterest, Telegram, TikTok, and Reddit.'
-KEYWORDS = "Ayrshare, Social Media API, Social Networks, Social Media Management, Social API, Social Posting, Social Analytics, Social Automation, Agency Social, Multiple User Posting, Instagram, YouTube API, X API, Twitter API, Facebook API, LinkedIn API, Reddit API, Telegram API, Pinterest API, Google Business Profile API, TikTok API"
+KEYWORDS = "Ayrshare, Social Media API, Social Networks, Social Media Management, Social API, Social Publishing, Social Posting,Social Analytics, Social Automation, Agency Social, Multiple User Posting, Instagram, YouTube API, X API, Twitter API, Facebook API, LinkedIn API, Reddit API, Telegram API, Pinterest API, Google Business Profile API, TikTok API"
 LONG_DESCRIPTION = (HERE / "README.md").read_text()
 LONG_DESC_TYPE = "text/markdown"
 PROJECT_URLS={
