@@ -2,9 +2,11 @@
 
 ![Ayrshare logo](https://www.ayrshare.com/wp-content/uploads/2020/08/ayr-logo-2156-reduced.png)
 
-The Social Media API is a wrapper SDK for [Ayrshare's APIs](https://www.ayrshare.com).
+The Social Media API is a Python wrapper SDK for [Ayrshare's APIs](https://www.ayrshare.com). While most of the capabliites are supported, the Python wrapper SDK is not as feature complete as the [Ayrshare's APIs](https://docs.ayrshare.com).
 
-Ayrshare is a powerful set of APIs that enable you to send social media posts, get analytics, and manage comments to *X/Twitter*, *Instagram*, *Facebook*, *LinkedIn*, *YouTube*, *Google Busienss Profile*, *Pinterest*, *TikTok*, *Reddit*, and *Telegram* on behalf of your users or clients.
+## What is Ayrshare?
+
+Ayrshare is a powerful set of APIs that enable you to send social media posts, get analytics, manage comments, do DMs, and more to *X/Twitter*, *Instagram*, *Facebook*, *LinkedIn*, *YouTube*, *Google Busienss Profile*, *Pinterest*, *TikTok*, *Reddit*, and *Telegram* on behalf of your users or clients.
 
 The Ayrshare Social API handles all the setup and maintenance for the social media networks. One API to rule them all (yeah, went there). See the full list of [full list of features](https://docs.ayrshare.com/rest-api/overview).
 
@@ -329,6 +331,7 @@ deleteCommentResponse = social.deleteComments({
 ```
 
 ### Reply Comment
+
 Reply to a comment. Available for Facebook, Instagram, LinkedIn, TikTok, X/Twitter, and YouTube. See the [reply comment endpoint](https://docs.ayrshare.com/rest-api/endpoints/comments#post-reply-to-a-comment) for more details.
 
 ``` python
@@ -545,6 +548,16 @@ Translate text for a post to over 100 different languages. See the [generate tra
 generateTranslationResponse = social.generateTranslation({
   'text': 'I love social media', # required: The text to be translated.
   'lang': 'es', # required: The language code to translate the text to. 
+})
+```
+
+### Generate Sentiment Analysis
+
+Generate a sentiment analysis on a social media post or comment to understand if the text is positive, negative, or neutral and recommendations on improving the text for a more positive reaction. See the [generate sentiment analysis endpoint](https://app.gitbook.com/o/RvONsW0GRWyluVaCjS4A/s/-MCwBL_6nvrcQpbDB4oM/rest-api/endpoints/generate#post-generate-sentiment-analysis) for more details.
+
+``` python
+generateSentiment= social.generateSentiment({
+  'text': 'I love social media' # required: The text to generate a sentiment analysis for.
 })
 ```
 
