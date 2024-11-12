@@ -1,8 +1,8 @@
 import requests
 from urllib.parse import urlencode
 
-base = 'http://localhost:5001/ayrshare-dev/us-central1/api/'
-#'https://app.ayrshare.com/api/'
+# base = 'http://localhost:5001/ayrshare-dev/us-central1/api/'
+base = 'https://app.ayrshare.com/api/'
 
 ERROR_MSG = {
     "status":
@@ -234,6 +234,9 @@ class SocialPost:
     
     def generateAltText(self, params=None):
         return doPost("generate/altText", params, self.headers)
+    
+    def generateSentiment(self, params=None):
+        return doPost("generate/sentiment", params, self.headers)
     
     def autoHashtags(self, params=None):
         return doPost("hashtags/auto", params, self.headers)

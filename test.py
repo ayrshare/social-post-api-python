@@ -2,23 +2,28 @@ import json, pprint
 from ayrshare import SocialPost
 
 # Add your API Key in a file names API-KEY.json { 'key': 'API KEY'}
+print("Loading API Key...")
 with open('./API-KEY.json') as f:
     API_KEY = json.load(f)
 
+print("Initializing SocialPost...")
+
 social = SocialPost(API_KEY["key"])
 pp = pprint.PrettyPrinter(indent=4)
+
+print("Running Tests...")
 
 # Post to Platforms
 postResult = social.post({'post': 'The best post ever!', 'platforms': ['twitter']})
 print(postResult)
 
 # Get Post
-#getResult = (social.getPost({ 'id': 'XOVUGutufIy5UZFb01e0'}))
-#print(getResult)
+getResult = social.getPost({ 'id': postResult['id']})
+print(getResult)
 
 # Retry Post
-#retryResult = social.retryPost({'id': 'sEe25WkXQnAz188IrrzX'})
-#print(retryResult)
+# retryResult = social.retryPost({'id': 'sEe25WkXQnAz188IrrzX'})
+# print(retryResult)
 
 # Update Post
 #updateResult = social.updatePost({'id': 'L1chosWRlwaur5fXJU5v', 'scheduleDate': '2024-12-31T12:31:00Z'})
