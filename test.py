@@ -59,7 +59,7 @@ print(deleteResult)
 #print(social.deleteFeed({'id': 'JjSuWHtjML0SXhH5-MUrE'}))
 
 # Get Feed
-#print(social.getFeed())
+#print(social.getFeeds())
 
 # Update Feed
 #print(social.updateFeed({'id': 'BArIfIZjJAH_rcKV07Rvy', 'autoHashtag': 'true'}))

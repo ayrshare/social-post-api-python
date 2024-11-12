@@ -343,6 +343,20 @@ replyCommentResponse = social.replyComment({
 
 The [Business Plan](https://www.ayrshare.com/business-plan-for-multiple-users/) allows you to create, manage, and post on behalf of client profiles via the API or Dashboard GUI. You can [integrate](https://docs.ayrshare.com/multiple-client-accounts/overview) Ayrshare into your platform, product, or agency and give your clients social media capabilites. Please [contact us](mailto:contact@ayrshare.com) with any questions.
 
+### Using Profile Key 
+
+In order to make any call on behalf of a specific profile, you may include the profile key in the call like so:
+
+``` python
+postResponse = social.post({
+  'post': 'The best post ever!',
+  'platforms': ['twitter'],
+  'profileKey': 'JI9s-kJII-9283-OMKM'
+})
+```
+
+The above is a post call but the same principle applies to all calls.
+
 ### Create Profile
 
 Create a new account profile under the primary account. See the [create profile endpoint](https://docs.ayrshare.com/rest-api/endpoints/profiles#create-a-new-profile) for more details.
