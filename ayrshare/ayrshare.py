@@ -73,12 +73,7 @@ class SocialPost:
         }
 
     def post(self, data, headers=None):
-        if headers is not None and 'Profile-Key' in headers:
-            headers.update(self.headers)
-        else:
-            headers = self.headers
-
-        return doPost("post", data, headers)
+        return doPost("post", data, self.headers)
 
     def delete(self, data=None):
         return doDelete("delete", data, self.headers)
