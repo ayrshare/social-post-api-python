@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.2.2] 2024-11-19
+
+- Updated README.
+
 ## [1.2.1] 2024-09-20
 
 - Added new endpoints with examples including resize, verify, generate, webhooks, and more. Please see README for details.
