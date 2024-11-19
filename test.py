@@ -34,7 +34,7 @@ deleteResult = social.delete({'id': postResult['id']})
 print(deleteResult)
 
 # Get History
-# print(social.history())
+print(social.history())
 
 # Verify Media Exists
 #print(social.verifyMediaExists({'mediaUrl': 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg'}))
