@@ -54,9 +54,6 @@ print(social.history())
 # Get Analytics Social
 #print(social.analyticsSocial({'platforms': ['twitter', 'linkedin', 'facebook']}))
 
-# Shorten
-#print(social.shorten({'url': 'https://www.ayrshare.com'}))
-
 # Add Feed
 #print(social.addFeed({'url': 'https://www.ayrshare.com/feed.xml'}))
 

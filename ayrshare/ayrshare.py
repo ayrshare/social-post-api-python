@@ -121,9 +121,6 @@ class SocialPost:
     def resizeImage(self, data=None):
         return doPost("media/resize", data, self.headers)
 
-    def analyticsLinks(self, params=None):
-        return doGet("analytics/links", params, self.headers)
-
     def analyticsPost(self, data=None):
         return doPost("analytics/post", data, self.headers)
     
@@ -135,9 +132,6 @@ class SocialPost:
 
     def upload(self, data=None):
         return doPost("upload", data, self.headers)
-
-    def shorten(self, data=None):
-        return doPost("shorten", data, self.headers)
 
     def addFeed(self, data=None):
         return doPost("feed", data, self.headers)
