@@ -1,6 +1,7 @@
 New Setup: python3 setup.py install
 pip3 install twine
 pip3 install wheel
+pip install urllib3==1.26.15 requests-toolbelt==0.10.1
 
 Release:
 Delete: files in /dist

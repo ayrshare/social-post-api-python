@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.2.2] 2024-12-13
+## [1.2.3] 2024-12-13
 
 - Updated README with new docs.
 

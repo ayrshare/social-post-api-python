@@ -12,6 +12,9 @@ ERROR_MSG = {
 }
 
 def doPost(type, data, headerData):
+    if data is None:
+        data = {}
+
     data["source"] = "pypi"
     payload = data
     headers = headerData
@@ -19,6 +22,9 @@ def doPost(type, data, headerData):
     return r.json()
 
 def doPut(type, data, headerData):
+    if data is None:
+        data = {}
+
     data["source"] = "pypi"
     payload = data
     headers = headerData
@@ -37,6 +43,9 @@ def buildParams (data) :
     return params
 
 def doGet(type, params, headerData):
+    if params is None:
+        params = {}
+
     params["source"] = "pypi"
     headers = headerData
     r = requests.get("{}{}?{}".format(base, type, urlencode(buildParams(params))),
@@ -45,6 +54,9 @@ def doGet(type, params, headerData):
 
 
 def doDelete(type, data, headerData):
+    if data is None:
+        data = {}
+
     data["source"] = "pypi"
     payload = data
     headers = headerData
@@ -60,13 +72,16 @@ class SocialPost:
             'Authorization': 'Bearer ' + API_KEY
         }
 
-    def post(self, data):
+    def post(self, data, headers=None):
         return doPost("post", data, self.headers)
 
-    def delete(self, data):
+    def delete(self, data=None):
         return doDelete("delete", data, self.headers)
         
-    def getPost(self, data):
+    def getPost(self, data=None):
+        if data is None:
+            data = {}
+
         id = ""
 
         if 'id' in data:
@@ -74,13 +89,16 @@ class SocialPost:
 
         return doGet("post" + id, data, self.headers)
     
-    def retryPost(self, data):
+    def retryPost(self, data=None):
         return doPut("post/retry", data, self.headers)
     
-    def updatePost(self, data):
+    def updatePost(self, data=None):
         return doPut("post", data, self.headers)
 
-    def history(self, params={}):
+    def history(self, params=None):
+        if params is None:
+            params = {}
+
         id = ""
 
         if 'id' in params:
@@ -88,73 +106,70 @@ class SocialPost:
 
         return doGet("history" + id, params, self.headers)
 
-    def media(self, params={}):
+    def media(self, params=None):
         return doGet("media", params, self.headers)
     
-    def verifyMediaExists(self, params={}):
+    def verifyMediaExists(self, params=None):
         return doPost("media/urlExists", params, self.headers)
     
-    def mediaUploadUrl(self, params={}):
+    def mediaUploadUrl(self, params=None):
         return doGet("media/uploadUrl", params, self.headers)
     
-    def mediaMeta(self, params={}):
+    def mediaMeta(self, params=None):
         return doGet("media/meta", params, self.headers)
     
-    def resizeImage(self, data):
+    def resizeImage(self, data=None):
         return doPost("media/resize", data, self.headers)
 
-    def analyticsLinks(self, params={}):
-        return doGet("analytics/links", params, self.headers)
-
-    def analyticsPost(self, data):
+    def analyticsPost(self, data=None):
         return doPost("analytics/post", data, self.headers)
     
-    def analyticsSocial(self, params={}):
+    def analyticsSocial(self, params=None):
         return doPost("analytics/social", params, self.headers)
 
-    def user(self, params={}):
+    def user(self, params=None):
         return doGet("user", params, self.headers)
 
-    def upload(self, data):
+    def upload(self, data=None):
         return doPost("upload", data, self.headers)
 
-    def shorten(self, data):
-        return doPost("shorten", data, self.headers)
-
-    def addFeed(self, data):
+    def addFeed(self, data=None):
         return doPost("feed", data, self.headers)
 
-    def deleteFeed(self, data):
+    def deleteFeed(self, data=None):
         return doDelete("feed", data, self.headers)
     
-    def getFeeds(self, params={}):
+    def getFeeds(self, params=None):
         return doGet("feed", params, self.headers)
     
-    def updateFeed(self, data):
+    def updateFeed(self, data=None):
         return doPut("feed", data, self.headers)
 
-    def createProfile(self, data):
+    def createProfile(self, data=None):
         return doPost("profiles/create-profile", data, self.headers)
 
-    def deleteProfile(self, data):
+    def deleteProfile(self, data=None):
         return doDelete("profiles/delete-profile", data, self.headers)
     
-    def updateProfile(self, data):
+    def updateProfile(self, data=None):
         return doPut("profiles/profile", data, self.headers)
     
-    def getProfiles(self, params={}):
+    def getProfiles(self, params=None):
         return doGet("profiles", params, self.headers)
 
-    def generateJWT(self, data):
+    def generateJWT(self, data=None):
         return doPost("profiles/generateJWT", data, self.headers)
     
-    def unlinkSocial(self, data):
+    def unlinkSocial(self, data=None):
         return doDelete("profiles/social", data, self.headers)
 
-    def postComment(self, data):
+    def postComment(self, data=None):
         return doPost("comments", data, self.headers)
 
-    def getComments(self, params={}):
+    def getComments(self, params=None):
+        if params is None:
+            params = {}
+
         id = ""
 
         if 'id' in params:
@@ -162,7 +177,10 @@ class SocialPost:
 
         return doGet("comments" + id, params, self.headers)
     
-    def deleteComments(self, data):
+    def deleteComments(self, data=None):
+        if data is None:
+            data = {}
+
         id = ""
 
         if 'id' in data:
@@ -170,63 +188,66 @@ class SocialPost:
 
         return doDelete("comments" + id, data, self.headers)
     
-    def replyComment(self, data):
+    def replyComment(self, data=None):
         return doPost("comments/reply", data, self.headers)
 
-    def setAutoSchedule(self, data):
+    def setAutoSchedule(self, data=None):
         return doPost("auto-schedule/set", data, self.headers)
 
-    def deleteAutoSchedule(self, data):
+    def deleteAutoSchedule(self, data=None):
        return doDelete("auto-schedule/delete", data, self.headers)
 
 
-    def listAutoSchedule(self, params={}):
+    def listAutoSchedule(self, params=None):
         return doGet("auto-schedule/list", params, self.headers)
 
 
-    def registerWebhook(self, data):
+    def registerWebhook(self, data=None):
         return doPost("hook/webhook", data, self.headers)
 
-    def unregisterWebhook(self, data):
+    def unregisterWebhook(self, data=None):
         return doDelete("hook/webhook", data, self.headers)
 
-    def listWebhooks(self, params={}):
+    def listWebhooks(self, params=None):
         return doGet("hook/webhook", params, self.headers)
     
-    def getBrandByUser(self, params={}):
+    def getBrandByUser(self, params=None):
         return doGet("brand/byUser", params, self.headers)
     
-    def generatePost(self, params):
+    def generatePost(self, params=None):
         return doPost("generate/post", params, self.headers)
     
-    def generateRewrite(self, params):
+    def generateRewrite(self, params=None):
         return doPost("generate/rewrite", params, self.headers)
     
-    def generateTranscription(self, params):
+    def generateTranscription(self, params=None):
         return doPost("generate/transcription", params, self.headers)
     
-    def generateTranslation(self, params):
+    def generateTranslation(self, params=None):
         return doPost("generate/translate", params, self.headers)
     
-    def generateAltText(self, params):
+    def generateAltText(self, params=None):
         return doPost("generate/altText", params, self.headers)
     
-    def generateSentiment(self, params):
+    def generateSentiment(self, params=None):
         return doPost("generate/sentiment", params, self.headers)
     
-    def autoHashtags(self, params):
+    def autoHashtags(self, params=None):
         return doPost("hashtags/auto", params, self.headers)
     
-    def recommendHashtags(self, params):
+    def recommendHashtags(self, params=None):
         return doGet("hashtags/recommend", params, self.headers)
     
-    def checkBannedHashtags(self, params):
+    def checkBannedHashtags(self, params=None):
         return doGet("hashtags/banned", params, self.headers)
     
-    def shortLink(self, params):
+    def shortLink(self, params=None):
         return doPost("links", params, self.headers)
     
-    def shortLinkAnalytics(self, params):
+    def shortLinkAnalytics(self, params=None):
+        if params is None:
+            params = {}
+
         id = ""
 
         if 'id' in params:
@@ -234,10 +255,13 @@ class SocialPost:
 
         return doGet("links" + id, params, self.headers)
     
-    def reviews(self, params):
+    def reviews(self, params=None):
         return doGet("reviews", params, self.headers)
     
-    def review(self, params):
+    def review(self, params=None):
+        if params is None:
+            params = {}
+
         id = ""
 
         if 'id' in params:
@@ -245,9 +269,9 @@ class SocialPost:
 
         return doGet("reviews" + id, params, self.headers)
     
-    def reviewReply(self, params):
+    def reviewReply(self, params=None):
         return doPost("reviews", params, self.headers)
     
-    def deleteReviewReply(self, params):
+    def deleteReviewReply(self, params=None):
         return doDelete("reviews", params, self.headers)
 
