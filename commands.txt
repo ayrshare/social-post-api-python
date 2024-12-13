@@ -2,6 +2,8 @@ New Setup: python3 setup.py install
 pip3 install twine
 pip3 install wheel
 
-python3 setup.py sdist bdist_wheel
+Release:
+Delete: files in /dist
+Run: python3 setup.py sdist bdist_wheel
 For Test: twine upload --repository-url https://test.pypi.org/legacy/ dist/* --verbose
-For Release: twine upload --skip-existing dist/*
+For Release: twine upload --skip-existing dist/* --verbose
