@@ -34,7 +34,7 @@ deleteResult = social.delete({'id': postResult['id']})
 print(deleteResult)
 
 # Get History
-# print(social.history())
+print(social.history())
 
 # Verify Media Exists
 #print(social.verifyMediaExists({'mediaUrl': 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg'}))
@@ -54,9 +54,6 @@ print(deleteResult)
 # Get Analytics Social
 #print(social.analyticsSocial({'platforms': ['twitter', 'linkedin', 'facebook']}))
 
-# Shorten
-#print(social.shorten({'url': 'https://www.ayrshare.com'}))
-
 # Add Feed
 #print(social.addFeed({'url': 'https://www.ayrshare.com/feed.xml'}))
 
@@ -64,7 +61,7 @@ print(deleteResult)
 #print(social.deleteFeed({'id': 'JjSuWHtjML0SXhH5-MUrE'}))
 
 # Get Feed
-#print(social.getFeed())
+#print(social.getFeeds())
 
 # Update Feed
 #print(social.updateFeed({'id': 'BArIfIZjJAH_rcKV07Rvy', 'autoHashtag': 'true'}))
