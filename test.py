@@ -9,7 +9,7 @@ with open('./API-KEY.json') as f:
 print("Initializing SocialPost...")
 
 social = SocialPost(API_KEY["key"])
-social.setProfileKey('XNG8S8T-CHE4HY0-NQMMHXP-J4ZV134')
+social.setProfileKey('PROFILE_KEY')
 pp = pprint.PrettyPrinter(indent=4)
 
 print("Running Tests...")
