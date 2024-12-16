@@ -361,15 +361,14 @@ replyCommentResponse = social.replyComment({
 
 The [Business Plan](https://www.ayrshare.com/business-plan-for-multiple-users/) allows you to create, manage, and post on behalf of client profiles via the API or Dashboard GUI. You can [integrate](https://www.ayrshare.com/docs/multiple-users/business-plan-overview) Ayrshare into your platform, product, or agency and give your clients social media capabilites. Please [contact us](mailto:contact@ayrshare.com) with any questions.
 
-A User Profile PROFILE_KEY can be used in the body or query parameters with the `profileKey` field. For example:
+A User Profile PROFILE_KEY can be set with the `setProfileKey` method.
 
 ``` python
-postResult = social.post({
-    'post': 'Nice Posting 2', 
-    'platforms': ['twitter', 'facebook', 'linkedin'],
-    'profileKey': 'JI9s-kJII-9283-OMKM',
-})
+social = SocialPost(API_KEY)
+social.setProfileKey('PROFILE_KEY')
 ```
+
+Replace `PROFILE_KEY` with the PROFILE_KEY of the profile you want to use.
 
 Please see the [Authorization](https://www.ayrshare.com/docs/apis/overview#authorization) docs for more details.
 

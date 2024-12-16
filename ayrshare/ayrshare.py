@@ -72,6 +72,12 @@ class SocialPost:
             'Authorization': 'Bearer ' + API_KEY
         }
 
+    def setProfileKey(self, PROFILE_KEY):
+        """Set or update the Profile-Key in the headers"""
+        if PROFILE_KEY:
+            self.headers['Profile-Key'] = PROFILE_KEY
+        return self
+
     def post(self, data, headers=None):
         return doPost("post", data, self.headers)
 

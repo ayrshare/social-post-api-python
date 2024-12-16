@@ -9,16 +9,17 @@ with open('./API-KEY.json') as f:
 print("Initializing SocialPost...")
 
 social = SocialPost(API_KEY["key"])
+social.setProfileKey('XNG8S8T-CHE4HY0-NQMMHXP-J4ZV134')
 pp = pprint.PrettyPrinter(indent=4)
 
 print("Running Tests...")
 
 # Post to Platforms
-postResult = social.post({'post': 'The best post ever!', 'platforms': ['twitter']})
+postResult = social.post({'randomPost': True, 'platforms': ['twitter']})
 print(postResult)
 
 # Get Post
-getResult = social.getPost({ 'id': postResult['id']})
+getResult = social.getPost({ 'id': postResult['posts'][0]['id']})
 print(getResult)
 
 # Retry Post
@@ -30,7 +31,7 @@ print(getResult)
 #print(updateResult)
 
 # Delete the Post
-deleteResult = social.delete({'id': postResult['id']})
+deleteResult = social.delete({'id': postResult['posts'][0]['id']})
 print(deleteResult)
 
 # Get History

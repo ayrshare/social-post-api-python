@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.2.4] 2024-12-13
+
+- Updated `setProfileKey` method to set the profile key for the SocialPost object.
+
 ## [1.2.3] 2024-12-13
 
 - Updated README with new docs.

@@ -4,4 +4,4 @@ API-KEY.json
 ./social_post_api.egg-info
 ./social_media_api.egg-info
 *bfg-report*
-./__pycache__
+__pycache__/*
