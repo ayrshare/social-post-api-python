@@ -2,7 +2,7 @@ import requests
 from urllib.parse import urlencode
 
 # base = 'http://localhost:5001/ayrshare-dev/us-central1/api/'
-base = 'https://app.ayrshare.com/api/'
+base = 'https://api.ayrshare.com/api/'
 
 ERROR_MSG = {
     "status":

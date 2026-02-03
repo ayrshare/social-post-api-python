@@ -1,7 +1,19 @@
-./dist
+# Build artifacts
+dist/
+build/
+*.egg-info/
+
+# Environment
+venv/
+env/
+.venv/
+
+# IDE and OS
+.DS_Store
+__pycache__/
+
+# Secrets
 API-KEY.json
-./build
-./social_post_api.egg-info
-./social_media_api.egg-info
+
+# Other
 *bfg-report*
-__pycache__/*
