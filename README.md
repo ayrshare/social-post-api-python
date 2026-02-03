@@ -21,6 +21,8 @@ For more information on setup, see our installation [video](https://youtu.be/G8M
 
 `pip install social-post-api`
 
+To verify your install (no API key required): `python smoke_test.py`
+
 ## Setup
 
 **1.** Create a free [Ayrshare account](https://app.ayrshare.com).

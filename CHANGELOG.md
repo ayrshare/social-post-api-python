@@ -1,5 +1,8 @@
 # Changelog
 
+## [1.2.5] 2026-01-20
+- Updates missing endpoint base url reference from app.ayrshare.com to api.ayrshare.com
+
 ## [1.2.4] 2024-12-13
 
 - Updated `setProfileKey` method to set the profile key for the SocialPost object.
