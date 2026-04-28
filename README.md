@@ -48,6 +48,31 @@ from ayrshare import SocialPost
 social = SocialPost('DJED-DKEP-SJWK-WJKS') # get an API Key at ayrshare.com
 ```
 
+### X/Twitter Bring-Your-Own-Keys (BYO)
+
+Starting **March 31, 2026**, X/Twitter operations through Ayrshare require your own X Developer App credentials. Set them once after construction and every subsequent SDK call will include the required `X-Twitter-OAuth1-*` headers.
+
+``` python
+from ayrshare import SocialPost
+
+social = SocialPost(API_KEY)
+social.set_twitter_byo(MY_X_API_KEY, MY_X_API_SECRET)
+
+social.post({"post": "Hello from BYO", "platforms": ["twitter"]})
+```
+
+Multi-tenant rotation:
+
+``` python
+social.set_twitter_byo(tenant_a_key, tenant_a_secret)
+social.post({ ... })
+
+social.clear_twitter_byo().set_twitter_byo(tenant_b_key, tenant_b_secret)
+social.post({ ... })
+```
+
+See the [X/Twitter BYO setup guide](https://docs.ayrshare.com/dashboard/connect-social-accounts/x-twitter-byo-keys) for instructions on obtaining your X consumer key and secret.
+
 ### History, Post, Delete Example
 
 This simple example shows how to post, get history, and delete the post. This example assumes you have a free API key from [Ayrshare](https://www.ayrshare.com) and have enabled X/Twitter, Facebook, and LinkedIn. Note, Instagram, Telegram, YouTube, TikTok, and Reddit also available.

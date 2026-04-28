@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.3.0] 2026-04-28
+
+- Added `set_twitter_byo(api_key, api_secret)` and `clear_twitter_byo()` for X/Twitter Bring-Your-Own-Keys support. When set, every outbound request includes `X-Twitter-OAuth1-Api-Key` and `X-Twitter-OAuth1-Api-Secret` headers — required for posting to X after the March 31, 2026 BYO enforcement date.
+
 ## [1.2.5] 2026-01-20
 - Updates missing endpoint base url reference from app.ayrshare.com to api.ayrshare.com
 
