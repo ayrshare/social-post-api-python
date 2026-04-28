@@ -65,10 +65,10 @@ Multi-tenant rotation:
 
 ``` python
 social.set_twitter_byo(tenant_a_key, tenant_a_secret)
-social.post({ ... })
+social.post({"post": "Hello from BYO", "platforms": ["twitter"]})
 
 social.clear_twitter_byo().set_twitter_byo(tenant_b_key, tenant_b_secret)
-social.post({ ... })
+social.post({"post": "Hello from BYO", "platforms": ["twitter"]})
 ```
 
 See the [X/Twitter BYO setup guide](https://docs.ayrshare.com/dashboard/connect-social-accounts/x-twitter-byo-keys) for instructions on obtaining your X consumer key and secret.
