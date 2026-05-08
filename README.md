@@ -2,19 +2,16 @@
 
 ![Ayrshare logo](https://www.ayrshare.com/wp-content/uploads/2020/08/ayr-logo-2156-reduced.png)
 
-The Social Media API is a Python wrapper SDK for [Ayrshare's APIs](https://www.ayrshare.com). While most of the capabliites are supported, the Python wrapper SDK is not as feature complete as the [Ayrshare's APIs](https://www.ayrshare.com/docs/introduction).
-The Social Media API is a Python wrapper SDK for [Ayrshare's APIs](https://www.ayrshare.com). While most of the capabliites are supported, the Python wrapper SDK is not as feature complete as the [Ayrshare's APIs](https://www.ayrshare.com/docs/introduction).
+The Social Media API is a Python wrapper SDK for [Ayrshare's APIs](https://www.ayrshare.com). While most capabilities are supported, this Python wrapper is not as feature complete as the [REST API](https://www.ayrshare.com/docs/introduction).
 
 ## What is Ayrshare?
 
-Ayrshare is a powerful set of APIs that enable you to send social media posts, get analytics, manage comments, do DMs, and more to *X/Twitter*, *Instagram*, *Facebook*, *LinkedIn*, *YouTube*, *Google Busienss Profile*, *Pinterest*, *TikTok*, *Reddit*, and *Telegram* on behalf of your users or clients.
+Ayrshare is a powerful set of APIs that enable you to send social media posts, get analytics, manage comments, DMs, and more to *X/Twitter*, *Instagram*, *Facebook*, *LinkedIn*, *YouTube*, *Google Business Profile*, *Pinterest*, *TikTok*, *Reddit*, and *Telegram* on behalf of your users or clients.
 
-The Ayrshare Social API handles all the setup and maintenance for the social media networks. One API to rule them all (yeah, went there). See the full list of [full list of features](https://www.ayrshare.com/docs/apis/overview).
-The Ayrshare Social API handles all the setup and maintenance for the social media networks. One API to rule them all (yeah, went there). See the full list of [full list of features](https://www.ayrshare.com/docs/apis/overview).
+The Ayrshare Social API handles setup and maintenance for the social networks—one integration for many platforms. See the [full list of features](https://www.ayrshare.com/docs/apis/overview).
 
 Get started with a [free plan](https://www.ayrshare.com/pricing), or if you have a platform or manage multiple users check out the [Business Plan](https://www.ayrshare.com/business-plan-for-multiple-users/).
 
-For more information on setup, see our installation [video](https://youtu.be/G8M6DZdtcMc) or our [Quick Start Guide](https://www.ayrshare.com/docs/quickstart).
 For more information on setup, see our installation [video](https://youtu.be/G8M6DZdtcMc) or our [Quick Start Guide](https://www.ayrshare.com/docs/quickstart).
 
 ## Installation
@@ -29,13 +26,15 @@ To verify your install (no API key required): `python smoke_test.py`
 
    ![alt Social Accounts Setup](https://www.ayrshare.com/wp-content/uploads/Ayrshare-login.png)
 
-**2.** Enable your social media accounts such as C/Twitter, Facebook, LinkedIn, Reddit, Instagram, Google Business Profile, Telegram, TikTok, or YouTube in the Ayrshare dashboard.
+**2.** Enable your social media accounts such as X/Twitter, Facebook, LinkedIn, Reddit, Instagram, Google Business Profile, Telegram, TikTok, or YouTube in the Ayrshare dashboard.
 
    ![alt Social Accounts Setup](https://www.ayrshare.com/wp-content/uploads/Ayrshare-social-linking.png)
   
 **3.** Copy your API Key from the Ayrshare dashboard. Used for authentication.
 
    ![alt API Key](https://www.ayrshare.com/wp-content/uploads/Ayrshare-API-key.png)
+
+**X/Twitter:** Posting via this SDK requires your own X Developer App consumer key and secret (Bring-Your-Own-Keys / BYOK). Use `social.set_twitter_byo(api_key, api_secret)` — see **[X/Twitter Bring-Your-Own-Keys (BYO)](#xtwitter-bring-your-own-keys-byo)** below and the [X/Twitter BYO setup guide](https://docs.ayrshare.com/dashboard/connect-social-accounts/x-twitter-byo-keys).
 
 ## Getting Started
 
@@ -48,23 +47,51 @@ from ayrshare import SocialPost
 social = SocialPost('DJED-DKEP-SJWK-WJKS') # get an API Key at ayrshare.com
 ```
 
+### X/Twitter Bring-Your-Own-Keys (BYO)
+
+*(Same requirement is often called **BYOK** — bring your own key.)*
+
+As of **March 31, 2026**, posting and other X/Twitter actions through Ayrshare **require** your own X Developer App consumer key and secret in the outbound API request — Ayrshare enforces this on every X-bound call. Call `social.set_twitter_byo(api_key, api_secret)` once on the instance; afterwards **every request** issued by this `SocialPost` client includes the headers `X-Twitter-OAuth1-Api-Key` and `X-Twitter-OAuth1-Api-Secret` per the [official BYO docs](https://docs.ayrshare.com/dashboard/connect-social-accounts/x-twitter-byo-keys).
+
+``` python
+from ayrshare import SocialPost
+
+social = SocialPost(API_KEY)
+social.set_twitter_byo(MY_X_API_KEY, MY_X_API_SECRET)
+
+social.post({"post": "Hello from BYO", "platforms": ["twitter"]})
+```
+
+Multi-tenant rotation:
+
+``` python
+social.set_twitter_byo(tenant_a_key, tenant_a_secret)
+social.post({"post": "Hello from BYO", "platforms": ["twitter"]})
+
+social.clear_twitter_byo().set_twitter_byo(tenant_b_key, tenant_b_secret)
+social.post({"post": "Hello from BYO", "platforms": ["twitter"]})
+```
+
 ### History, Post, Delete Example
 
-This simple example shows how to post, get history, and delete the post. This example assumes you have a free API key from [Ayrshare](https://www.ayrshare.com) and have enabled X/Twitter, Facebook, and LinkedIn. Note, Instagram, Telegram, YouTube, TikTok, and Reddit also available.
+This example posts to Twitter, Facebook, and LinkedIn. You need a free [Ayrshare](https://www.ayrshare.com) API key and those networks enabled in the dashboard. **Twitter requires BYO** — use your X app’s consumer key and secret (same as in the **X/Twitter BYO** section above).
 
 ``` python
 from ayrshare import SocialPost
 social = SocialPost('8jKj782Aw8910dCN') # get an API Key at ayrshare.com
 
-# Post to Platforms Twitter, Facebook, and LinkedIn
+# Required for X/Twitter in `platforms` (BYO / BYOK)
+social.set_twitter_byo('YOUR_X_CONSUMER_KEY', 'YOUR_X_CONSUMER_SECRET')
+
 postResult = social.post({'post': 'Nice Posting 2', 'platforms': ['twitter', 'facebook', 'linkedin']})
 print(postResult)
 
-# Delete
+# /post returns the Ayrshare post id at the top level as `id`. Per-platform
+# IDs live under `postIds[]`, but delete/getPost/analytics all expect the
+# Ayrshare-level id. See https://www.ayrshare.com/docs/apis/overview#social-post-id
 deleteResult = social.delete({'id': postResult['id']})
 print(deleteResult)
 
-# History
 print(social.history())
 ```
 
@@ -96,9 +123,10 @@ postResponse = social.post({
 })
 ```
 
+If `"twitter"` is included in `platforms`, call `social.set_twitter_byo(x_consumer_key, x_consumer_secret)` before `post` (and any other X-related calls you make with the same client). See [X/Twitter Bring-Your-Own-Keys (BYO)](#xtwitter-bring-your-own-keys-byo).
+
 ### Delete
 
-Delete a post with a given post ID, obtained from the "post" response. Returns a promise with the delete status. Also, can bulk delete multiple IDs at once using the "bulk" key. See the [delete endpoint](https://www.ayrshare.com/docs/apis/post/delete-post) for more details.
 Delete a post with a given post ID, obtained from the "post" response. Returns a promise with the delete status. Also, can bulk delete multiple IDs at once using the "bulk" key. See the [delete endpoint](https://www.ayrshare.com/docs/apis/post/delete-post) for more details.
 
 ``` python
@@ -112,7 +140,6 @@ deleteResponse = social.delete({
 ### Get Post
 
 Get a post with a given post ID. Returns a promise that resolves to a post object. See the [get post endpoint](https://www.ayrshare.com/docs/apis/post/get-post) for more details.
-Get a post with a given post ID. Returns a promise that resolves to a post object. See the [get post endpoint](https://www.ayrshare.com/docs/apis/post/get-post) for more details.
 
 ``` python
 getResponse = social.getPost({
@@ -124,7 +151,6 @@ getResponse = social.getPost({
 ### Retry Post
 
 Retry a failed post with a given post ID. Returns a promise that resolves to an object with the post status. See the [retry post endpoint](https://www.ayrshare.com/docs/apis/post/retry-post) for more details.
-Retry a failed post with a given post ID. Returns a promise that resolves to an object with the post status. See the [retry post endpoint](https://www.ayrshare.com/docs/apis/post/retry-post) for more details.
 
 ``` python
 retryResponse = social.retryPost({
@@ -135,7 +161,7 @@ retryResponse = social.retryPost({
 
 ### Update Post
 
-Update a post with a given post ID. Returns a promise that resolves to an object with status and update info. See the [update post endpoint](https://www.ayrshare.com/docs/apis/post/retry-post) for more details.
+Update a post with a given post ID. Returns a promise that resolves to an object with status and update info. See the [update post endpoint](https://www.ayrshare.com/docs/apis/post/update-post) for more details.
 
 ``` python
 updateResponse = social.updatePost({
@@ -183,7 +209,6 @@ uploadResponse = social.upload({
 ### Get Media
 
 Get all media URLS. Returns a promise that resolves to an array of URL objects. See the [media endpoint](https://www.ayrshare.com/docs/apis/media/get-media-in-gallery) for more details.
-Get all media URLS. Returns a promise that resolves to an array of URL objects. See the [media endpoint](https://www.ayrshare.com/docs/apis/media/get-media-in-gallery) for more details.
 
 ``` python
 mediaResponse = social.media()
@@ -191,7 +216,6 @@ mediaResponse = social.media()
 
 ### Verify Media Exists
 
-Verify that the media file exists when uploaded. See the [media verify exists endpoint](https://www.ayrshare.com/docs/apis/media/verify-media-url) for more details.
 Verify that the media file exists when uploaded. See the [media verify exists endpoint](https://www.ayrshare.com/docs/apis/media/verify-media-url) for more details.
 
 ``` python
@@ -203,7 +227,6 @@ verifyResponse = social.verifyMediaExists({
 
 ### Resize Image
 
-Get image resized according to social network requirements. See the [resize image endpoint](https://www.ayrshare.com/docs/apis/media/resize) for more details.
 Get image resized according to social network requirements. See the [resize image endpoint](https://www.ayrshare.com/docs/apis/media/resize) for more details.
 
 ``` python
@@ -270,7 +293,7 @@ Add a new RSS or Substack feed to auto post all new articles. Returns a promise 
 
 ``` python
 feedResponse = social.addFeed({
-  # Required: URL to shorten
+  # Required: RSS or Substack feed URL
   'url': 'https://theRSSFeed',
 
   # Optional: Value: "rss" or "substack". 
@@ -300,7 +323,6 @@ feedsResponse = social.getFeeds()
 
 ### Update Feed
 
-Update an RSS feed for a given ID. Returns a promise that resolves to an object containing the feed ID. See the [update feed endpoint](https://www.ayrshare.com/docs/apis/feeds/update-feed) for more details.
 Update an RSS feed for a given ID. Returns a promise that resolves to an object containing the feed ID. See the [update feed endpoint](https://www.ayrshare.com/docs/apis/feeds/update-feed) for more details.
 
 ``` python
@@ -349,7 +371,6 @@ deleteCommentResponse = social.deleteComments({
 ### Reply Comment
 
 Reply to a comment. Available for Facebook, Instagram, LinkedIn, TikTok, X/Twitter, and YouTube. See the [reply comment endpoint](https://www.ayrshare.com/docs/apis/comments/reply-to-comment) for more details.
-Reply to a comment. Available for Facebook, Instagram, LinkedIn, TikTok, X/Twitter, and YouTube. See the [reply comment endpoint](https://www.ayrshare.com/docs/apis/comments/reply-to-comment) for more details.
 
 ``` python
 replyCommentResponse = social.replyComment({
@@ -361,7 +382,7 @@ replyCommentResponse = social.replyComment({
 
 ## Business Functions for Multiple Users - Business or Enterprise Plan Required
 
-The [Business Plan](https://www.ayrshare.com/business-plan-for-multiple-users/) allows you to create, manage, and post on behalf of client profiles via the API or Dashboard GUI. You can [integrate](https://www.ayrshare.com/docs/multiple-users/business-plan-overview) Ayrshare into your platform, product, or agency and give your clients social media capabilites. Please [contact us](mailto:contact@ayrshare.com) with any questions.
+The [Business Plan](https://www.ayrshare.com/business-plan-for-multiple-users/) allows you to create, manage, and post on behalf of client profiles via the API or Dashboard GUI. You can [integrate](https://www.ayrshare.com/docs/multiple-users/business-plan-overview) Ayrshare into your platform, product, or agency and give your clients social media capabilities. Please [contact us](mailto:contact@ayrshare.com) with any questions.
 
 A User Profile PROFILE_KEY can be set with the `setProfileKey` method.
 
@@ -388,7 +409,6 @@ createProfileResponse = social.createProfile({
 ### Delete Profile
 
 Delete a profile owned by the primary account. See the [delete profile endpoint](https://www.ayrshare.com/docs/apis/profiles/delete-profile) for more details.
-Delete a profile owned by the primary account. See the [delete profile endpoint](https://www.ayrshare.com/docs/apis/profiles/delete-profile) for more details.
 
 ``` python
 deleteProfileResponse = social.deleteProfile({
@@ -399,7 +419,6 @@ deleteProfileResponse = social.deleteProfile({
 
 ### Generate a JWT URL
 
-Generate a JWT Token and URL used for authorizing a user's access to the Social Account linking page. See the [generate JWT endpoint](https://www.ayrshare.com/docs/apis/profiles/generate-jwt) for more details.
 Generate a JWT Token and URL used for authorizing a user's access to the Social Account linking page. See the [generate JWT endpoint](https://www.ayrshare.com/docs/apis/profiles/generate-jwt) for more details.
 
 ``` python
@@ -412,7 +431,6 @@ generateJWTResponse = social.generateJWT({
 
 ### Update Profile
 
-Update a profile owned by the primary account. See the [update profile endpoint](https://www.ayrshare.com/docs/apis/profiles/update-profile) for more details.
 Update a profile owned by the primary account. See the [update profile endpoint](https://www.ayrshare.com/docs/apis/profiles/update-profile) for more details.
 
 ``` python
@@ -428,7 +446,6 @@ updateProfileResponse = social.updateProfile({
 ### Get Profiles
 
 Get all the profiles associated with the primary account. See the [get profile endpoint](https://www.ayrshare.com/docs/apis/profiles/get-profiles) for more details.
-Get all the profiles associated with the primary account. See the [get profile endpoint](https://www.ayrshare.com/docs/apis/profiles/get-profiles) for more details.
 
 ``` python
 getProfileResponse = social.getProfiles()
@@ -436,7 +453,6 @@ getProfileResponse = social.getProfiles()
 
 ### Unlink Social Network
 
-Unlink a social account for a given user profile owned by the primary account. See the [unlink social network endpoint](https://www.ayrshare.com/docs/apis/profiles/unlink-social-network) for more details.
 Unlink a social account for a given user profile owned by the primary account. See the [unlink social network endpoint](https://www.ayrshare.com/docs/apis/profiles/unlink-social-network) for more details.
 
 ``` python
@@ -473,7 +489,6 @@ autoHashtagsResponse = social.autoHashtags({
 ### Recommend Hashtags
 
 Get suggestions for hashtags based on a keyword. See the [recommend hashtags endpoint](https://www.ayrshare.com/docs/apis/hashtags/recommend-hashtags) for more details.
-Get suggestions for hashtags based on a keyword. See the [recommend hashtags endpoint](https://www.ayrshare.com/docs/apis/hashtags/recommend-hashtags) for more details.
 
 ``` python
 recommendHashtagsResponse = social.recommendHashtags({
@@ -483,7 +498,6 @@ recommendHashtagsResponse = social.recommendHashtags({
 
 ### Check Banned Hashtags
 
-Check if a hashtag is banned on Instagram or other social networks. See the [check banned hashtags endpoint](https://www.ayrshare.com/docs/apis/hashtags/check-hashtags) for more details.
 Check if a hashtag is banned on Instagram or other social networks. See the [check banned hashtags endpoint](https://www.ayrshare.com/docs/apis/hashtags/check-hashtags) for more details.
 
 ``` python
@@ -495,7 +509,6 @@ checkBannedHashtagsResponse = social.checkBannedHashtags({
 ### Get All Reviews
 
 Retrieve all the reviews for the specified platform. See the [get all reviews endpoint](https://www.ayrshare.com/docs/apis/reviews/get-reviews) for more details.
-Retrieve all the reviews for the specified platform. See the [get all reviews endpoint](https://www.ayrshare.com/docs/apis/reviews/get-reviews) for more details.
 
 ``` python
 allReviewsResponse = social.reviews({
@@ -505,7 +518,6 @@ allReviewsResponse = social.reviews({
 
 ### Get Single Review
 
-Retrieve a single review. See the [get single review endpoint](https://www.ayrshare.com/docs/apis/reviews/get-one-review) for more details.
 Retrieve a single review. See the [get single review endpoint](https://www.ayrshare.com/docs/apis/reviews/get-one-review) for more details.
 
 ``` python
@@ -517,7 +529,6 @@ singleReviewResponse = social.review({
 
 ### Reply to Review
 
-Reply to a review. See the [reply to review endpoint](https://www.ayrshare.com/docs/apis/reviews/reply-review) for more details.
 Reply to a review. See the [reply to review endpoint](https://www.ayrshare.com/docs/apis/reviews/reply-review) for more details.
 
 ``` python
@@ -544,7 +555,6 @@ deleteReplyReviewResponse = social.deleteReplyReview({
 ### Generate Post
 
 Generate a new social post using ChatGPT. Token limits applicable. See the [generate post endpoint](https://www.ayrshare.com/docs/apis/generate/post-text) for more details.
-Generate a new social post using ChatGPT. Token limits applicable. See the [generate post endpoint](https://www.ayrshare.com/docs/apis/generate/post-text) for more details.
 
 ``` python
 generatePostResponse = social.generatePost({
@@ -557,7 +567,6 @@ generatePostResponse = social.generatePost({
 
 ### Generate Rewrite
 
-Generate variations of a social media post using ChatGPT. Token limits applicable. See the [generate rewrite endpoint](https://www.ayrshare.com/docs/apis/generate/rewrite-post) for more details.
 Generate variations of a social media post using ChatGPT. Token limits applicable. See the [generate rewrite endpoint](https://www.ayrshare.com/docs/apis/generate/rewrite-post) for more details.
 
 ``` python
@@ -573,7 +582,6 @@ generateRewriteResponse = social.generateRewrite({
 ### Generate Transcription
 
 Provide a transcription of a video file. See the [generate transcription endpoint](https://www.ayrshare.com/docs/apis/generate/transcribe-video) for more details.
-Provide a transcription of a video file. See the [generate transcription endpoint](https://www.ayrshare.com/docs/apis/generate/transcribe-video) for more details.
 
 ``` python
 generateTranscriptionResponse = social.generateTranscription({
@@ -583,7 +591,6 @@ generateTranscriptionResponse = social.generateTranscription({
 
 ### Generate Translation
 
-Translate text for a post to over 100 different languages. See the [generate translation endpoint](https://www.ayrshare.com/docs/apis/generate/translate-post) for more details.
 Translate text for a post to over 100 different languages. See the [generate translation endpoint](https://www.ayrshare.com/docs/apis/generate/translate-post) for more details.
 
 ``` python
@@ -605,7 +612,7 @@ generateSentiment= social.generateSentiment({
 
 ### Generate Alt Text
 
-Create AI-generated alt text for your images.  See the [generate alt text endpoint](https://www.ayrshare.com/docs/apis/generate/sentiment) for more details.
+Create AI-generated alt text for your images. See the [Generate Alt Text](https://www.ayrshare.com/docs/apis/generate/overview#generate-alt-text) section in the Generate API overview.
 
 ``` python
 generateAltTextResponse = social.generateAltText({
@@ -634,7 +641,6 @@ shortenLinkResponse = social.shortLink({
 ### Analytics for Shortened Links
 
 Return analytics for all shortened links or a single link for a given link ID. See the [analytics link endpoint](https://www.ayrshare.com/docs/apis/links/link-analytics) for more details.
-Return analytics for all shortened links or a single link for a given link ID. See the [analytics link endpoint](https://www.ayrshare.com/docs/apis/links/link-analytics) for more details.
 
 ``` python
 analyticsLinkResponse = social.shortLinkAnalytics({
@@ -648,7 +654,6 @@ analyticsLinkResponse = social.shortLinkAnalytics({
 
 ### Additional Calls
 
-- [Webhooks endpoints](https://www.ayrshare.com/docs/apis/webhooks/overview)
 - [Webhooks endpoints](https://www.ayrshare.com/docs/apis/webhooks/overview)
 - unregisterWebhook
 - listWebhook
@@ -665,11 +670,9 @@ We have other package and integrations such as [Node NPM](https://www.ayrshare.c
 Additional examples, responses, etc. can be found at:
 
 [RESTful API Endpoint Docs](https://www.ayrshare.com/docs/apis/overview)
-[RESTful API Endpoint Docs](https://www.ayrshare.com/docs/apis/overview)
 
 [GitHub](https://github.com/ayrshare/social-post-api-python)
 
-See our [changelog](https://www.ayrshare.com/docs/whatsnew/latest) for the latest and greatest.
 See our [changelog](https://www.ayrshare.com/docs/whatsnew/latest) for the latest and greatest.
 
 Please [contact us](mailto:support@ayrshare.com) with your questions, or just to give us shout-out 📢!

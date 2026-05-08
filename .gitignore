@@ -6,7 +6,7 @@ build/
 # Environment
 venv/
 env/
-.venv/
+.venv*/
 
 # IDE and OS
 .DS_Store

@@ -78,6 +78,22 @@ class SocialPost:
             self.headers['Profile-Key'] = PROFILE_KEY
         return self
 
+    def set_twitter_byo(self, api_key, api_secret):
+        """Attach X/Twitter BYO (BYOK) consumer credentials to every subsequent request.
+
+        Required for all X/Twitter operations via Ayrshare (enforced as of
+        March 31, 2026). See https://docs.ayrshare.com/dashboard/connect-social-accounts/x-twitter-byo-keys.
+        """
+        self.headers['X-Twitter-OAuth1-Api-Key'] = api_key
+        self.headers['X-Twitter-OAuth1-Api-Secret'] = api_secret
+        return self
+
+    def clear_twitter_byo(self):
+        """Remove any previously-set X/Twitter BYO headers."""
+        self.headers.pop('X-Twitter-OAuth1-Api-Key', None)
+        self.headers.pop('X-Twitter-OAuth1-Api-Secret', None)
+        return self
+
     def post(self, data, headers=None):
         return doPost("post", data, self.headers)
 

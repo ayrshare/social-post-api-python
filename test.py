@@ -1,15 +1,51 @@
 import json, pprint
 from ayrshare import SocialPost
 
-# Add your API Key in a file names API-KEY.json { 'key': 'API KEY'}
-print("Loading API Key...")
-with open('./API-KEY.json') as f:
-    API_KEY = json.load(f)
+# API-KEY.json example:
+# {
+#   "key": "your-ayrshare-api-key",
+#   "profile_key": "optional — Business Plan profile key; omit if unused",
+#   "twitter_consumer_key": "optional — X Developer App API Key (BYO)",
+#   "twitter_consumer_secret": "optional — X Developer App API Secret Key (BYO)"
+# }
+#
+# X/Twitter posting requires BYO consumer credentials on the request (set_twitter_byo).
+# See https://docs.ayrshare.com/dashboard/connect-social-accounts/x-twitter-byo-keys
 
-print("Initializing SocialPost...")
+print("Loading API-KEY.json...")
+try:
+    with open('./API-KEY.json', encoding='utf-8') as f:
+        cfg = json.load(f)
+    ayr_key = cfg['key']
+except FileNotFoundError:
+    raise SystemExit(
+        "API-KEY.json not found in the current directory. "
+        "Create it with at least {\"key\": \"<your-ayrshare-api-key>\"} — "
+        "see the comment at the top of test.py for the full schema."
+    )
+except json.JSONDecodeError as exc:
+    raise SystemExit(f"API-KEY.json is invalid JSON: {exc}")
+except KeyError:
+    raise SystemExit("API-KEY.json is missing required field: 'key'.")
 
-social = SocialPost(API_KEY["key"])
-social.setProfileKey('PROFILE_KEY')
+social = SocialPost(ayr_key)
+
+profile_key = cfg.get("profile_key")
+if profile_key:
+    social.setProfileKey(profile_key)
+
+ck = (cfg.get("twitter_consumer_key") or "").strip()
+cs = (cfg.get("twitter_consumer_secret") or "").strip()
+if ck and cs:
+    social.set_twitter_byo(ck, cs)
+    print("Twitter/X BYO headers enabled (consumer key + secret).")
+else:
+    print(
+        "WARNING: twitter_consumer_key / twitter_consumer_secret missing — "
+        "X/Twitter requests will fail (BYO is enforced). "
+        "Add both fields to API-KEY.json or use platforms without twitter."
+    )
+
 pp = pprint.PrettyPrinter(indent=4)
 
 print("Running Tests...")
@@ -18,8 +54,16 @@ print("Running Tests...")
 postResult = social.post({'randomPost': True, 'platforms': ['twitter']})
 print(postResult)
 
+# /post returns the Ayrshare post ID at the top level as `id`.
+# Per-platform IDs (e.g. the Twitter status ID) live under `postIds`,
+# but getPost/delete/analytics all take the Ayrshare-level `id`.
+# See https://www.ayrshare.com/docs/apis/overview#social-post-id
+ayr_post_id = postResult.get('id')
+if not ayr_post_id:
+    raise SystemExit(f"Post failed; no Ayrshare id in response: {postResult}")
+
 # Get Post
-getResult = social.getPost({ 'id': postResult['posts'][0]['id']})
+getResult = social.getPost({'id': ayr_post_id})
 print(getResult)
 
 # Retry Post
@@ -31,7 +75,7 @@ print(getResult)
 #print(updateResult)
 
 # Delete the Post
-deleteResult = social.delete({'id': postResult['posts'][0]['id']})
+deleteResult = social.delete({'id': ayr_post_id})
 print(deleteResult)
 
 # Get History
