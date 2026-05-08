@@ -13,10 +13,21 @@ from ayrshare import SocialPost
 # See https://docs.ayrshare.com/dashboard/connect-social-accounts/x-twitter-byo-keys
 
 print("Loading API-KEY.json...")
-with open('./API-KEY.json') as f:
-    cfg = json.load(f)
+try:
+    with open('./API-KEY.json', encoding='utf-8') as f:
+        cfg = json.load(f)
+    ayr_key = cfg['key']
+except FileNotFoundError:
+    raise SystemExit(
+        "API-KEY.json not found in the current directory. "
+        "Create it with at least {\"key\": \"<your-ayrshare-api-key>\"} — "
+        "see the comment at the top of test.py for the full schema."
+    )
+except json.JSONDecodeError as exc:
+    raise SystemExit(f"API-KEY.json is invalid JSON: {exc}")
+except KeyError:
+    raise SystemExit("API-KEY.json is missing required field: 'key'.")
 
-ayr_key = cfg["key"]
 social = SocialPost(ayr_key)
 
 profile_key = cfg.get("profile_key")
