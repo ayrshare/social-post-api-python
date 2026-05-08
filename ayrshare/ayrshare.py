@@ -79,11 +79,10 @@ class SocialPost:
         return self
 
     def set_twitter_byo(self, api_key, api_secret):
-        """Attach X/Twitter Bring-Your-Own-Keys consumer credentials to every
-        subsequent request.
+        """Attach X/Twitter BYO (BYOK) consumer credentials to every subsequent request.
 
-        Required for posting to X after the March 31, 2026 enforcement date.
-        See https://docs.ayrshare.com/dashboard/connect-social-accounts/x-twitter-byo-keys.
+        Required for all X/Twitter operations via Ayrshare (enforced as of
+        March 31, 2026). See https://docs.ayrshare.com/dashboard/connect-social-accounts/x-twitter-byo-keys.
         """
         self.headers['X-Twitter-OAuth1-Api-Key'] = api_key
         self.headers['X-Twitter-OAuth1-Api-Secret'] = api_secret
